@@ -12,7 +12,7 @@ class mainpage extends StatefulWidget {
 }
 
 class _mainpageState extends State<mainpage> {
-  List<Widget> pages = [
+  List<Widget> pages = [ // 바텀 버튼 페이지 리스트
     const homepage(key: ValueKey("homepage")),
     const recipepage(key: ValueKey("recipepage")),
     const postingpage(key: ValueKey("postingpage")),

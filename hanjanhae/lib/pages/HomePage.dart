@@ -18,7 +18,7 @@ class _homepageState extends State<homepage> {
         child: LayoutBuilder(
           builder: (context, constraints) => RefreshIndicator(
             onRefresh: () async {
-              setState(() {});
+              setState(() {}); // 새로고침
             },
             child: SingleChildScrollView(
               child: Column(
@@ -49,7 +49,7 @@ class _homepageState extends State<homepage> {
                           child: Center(
                         child: null,
                       )),
-                      IconButton(
+                      IconButton( // 검색 페이지 이동
                         onPressed: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => const searchpage(),));
                         },

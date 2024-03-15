@@ -13,7 +13,7 @@ class _recipepageState extends State<recipepage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('recipe'),
+        title: const Text('Recipe'),
       ),
     );
   }
