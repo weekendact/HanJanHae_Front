@@ -8,7 +8,6 @@ void main() {
 class hanjanhae extends StatelessWidget {
   const hanjanhae({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,8 +17,13 @@ class hanjanhae extends StatelessWidget {
         fontFamily: 'Jalnan',
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          splashColor: Colors.transparent,
+          elevation: 0.0,
+        ),
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
+            foregroundColor: const MaterialStatePropertyAll(Colors.black),
             overlayColor: MaterialStateColor.resolveWith(
                 (states) => Colors.transparent), // 텍스트 버튼 애니메이션 제거
           ),
