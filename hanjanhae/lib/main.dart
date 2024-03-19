@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hanjanhae/pages/LoginPage.dart';
-import 'package:hanjanhae/pages/MainPage.dart';
+
 
 void main() {
   runApp(const hanjanhae());
