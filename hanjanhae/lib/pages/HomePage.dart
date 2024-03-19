@@ -14,6 +14,7 @@ class homepage extends StatefulWidget {
 
 class _homepageState extends State<homepage> {
   int current = 0;
+  Color iconColor = Colors.grey;
   final CarouselController _controller = CarouselController();
   List imageList = [
     "assets/cocktail.jpeg",
@@ -82,8 +83,7 @@ class _homepageState extends State<homepage> {
                     ),
                     Center(
                       child: SizedBox(
-                        width: 270,
-                        height: 220,
+                        width: 300,
                         child: sliderWidget(),
                       ),
                     ),
@@ -118,12 +118,49 @@ class _homepageState extends State<homepage> {
                         child: cocktailcard()),
                     ///////////////////////////////////cdh//////////////////////////////
                     const SizedBox(
+                      height: 50.0,
+                    ),
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        '오늘은 어떤걸',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        '마실지 모르겠다면?',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    const Text(
+                      'AI 한테 물어봐',
+                      style: TextStyle(
+                        fontSize: 30.0,
+                      ),
+                    ),
+                    const SizedBox(
                       height: 10.0,
                     ),
-                    Container(
-                      width: size.width,
-                      height: 150.0,
-                      color: Colors.grey,
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset(
+                          'assets/cocktail.jpeg',
+                          fit: BoxFit.cover,
+                          height: 200.0,
+                          width: 250.0,
+                        ),
+                      ),
                     ),
                     ///////////////////////////////////jmj//////////////////////////////
                     const SizedBox(
@@ -187,8 +224,9 @@ class _homepageState extends State<homepage> {
                   ),
                 ),
                 Positioned(
-                  top: 130,
-                  left: 35,
+                  left: 0,
+                  right: 0,
+                  bottom: 50.0,
                   child: hotcocktailname(),
                 )
               ]);
@@ -197,7 +235,7 @@ class _homepageState extends State<homepage> {
         },
       ).toList(),
       options: CarouselOptions(
-        height: 300,
+        height: 250,
         viewportFraction: 1.0,
         autoPlay: true,
         autoPlayInterval: const Duration(seconds: 10),
@@ -255,19 +293,27 @@ class _homepageState extends State<homepage> {
             child: Row(children: [
               Expanded(
                 child: TextButton(
-                  onPressed: () {},
-                  child: const Row(
+                  onPressed: () {
+                    setState(() {
+                      if (iconColor == Colors.grey) {
+                        iconColor = Colors.blue;
+                      } else {
+                        iconColor = Colors.grey;
+                      }
+                    });
+                  },
+                  child: Row(
                     children: [
                       Icon(
                         Icons.thumb_up,
                         size: 15,
-                        color: Colors.grey,
+                        color: iconColor,
                       ),
-                      Expanded(
+                      const Expanded(
                           child: Center(
                         child: null,
                       )),
-                      Text(
+                      const Text(
                         '100',
                         style: TextStyle(fontSize: 10),
                       ),
@@ -363,6 +409,7 @@ class _homepageState extends State<homepage> {
         _buildCocktailCard(context, 'assets/cocktail1.jpg', "칵테일3"),
         _buildCocktailCard(context, 'assets/cocktail1.jpg', "칵테일4"),
         _buildCocktailCard(context, 'assets/cocktail1.jpg', "칵테일5"),
+        _buildCocktailCard(context, 'assets/cocktail1.jpg', "칵테일6"),
       ],
     );
   }
