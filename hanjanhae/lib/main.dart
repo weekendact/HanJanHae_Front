@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hanjanhae/pages/LoginPage.dart';
 import 'package:hanjanhae/pages/MainPage.dart';
 
 void main() {
@@ -31,7 +32,7 @@ class hanjanhae extends StatelessWidget {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
               overlayColor: MaterialStateColor.resolveWith(
-                  (states) => Colors.transparent) // Elevated 버튼 애니메이션 제거
+                  (states) => Colors.transparent), // Elevated 버튼 애니메이션 제거
               ),
         ),
         iconButtonTheme: IconButtonThemeData(
@@ -41,7 +42,8 @@ class hanjanhae extends StatelessWidget {
               ),
         ),
       ),
-      home: const mainpage(),
+      // home: const mainpage(),
+      home: const loginpage(),
     );
   }
 }

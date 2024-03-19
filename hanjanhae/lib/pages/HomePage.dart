@@ -150,10 +150,11 @@ class _homepageState extends State<homepage> {
                     const SizedBox(
                       height: 10.0,
                     ),
-                    ElevatedButton(
-                      onPressed: () {},
+                    InkWell(
+                      onTap: () {
+                      },
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(10.0),
                         child: Image.asset(
                           'assets/cocktail.jpeg',
                           fit: BoxFit.cover,
@@ -410,6 +411,7 @@ class _homepageState extends State<homepage> {
         _buildCocktailCard(context, 'assets/cocktail1.jpg', "칵테일4"),
         _buildCocktailCard(context, 'assets/cocktail1.jpg', "칵테일5"),
         _buildCocktailCard(context, 'assets/cocktail1.jpg', "칵테일6"),
+        _buildCocktailCard(context, 'assets/cocktail1.jpg', "칵테일7"),
       ],
     );
   }

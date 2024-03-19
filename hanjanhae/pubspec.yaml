@@ -24,9 +24,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/googleicon.png
-    - assets/kakaoicon.png
-    - assets/navericon.png
+    - assets/loginicon/googleicon.png
+    - assets/loginicon/kakaoicon.png
+    - assets/loginicon/navericon.png
     - assets/cocktail.jpeg
     - assets/cocktail1.jpg
     - assets/cocktail2.jpg
