@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:hanjanhae/pages/MainPage.dart';
 import 'package:http/http.dart' as http;
@@ -24,7 +23,7 @@ class loginpage extends StatefulWidget {
 
 class _loginpageState extends State<loginpage> {
   LoginPlatform loginPlatform = LoginPlatform.none;
-  final String apiUrl = '데이터베이스 엔드 포인트 주소';
+  final String apiUrl = 'http://localhost:8080/user/signup';
 
   void signInWithKakao() async {
     try {
@@ -50,6 +49,8 @@ class _loginpageState extends State<loginpage> {
 
       final profileInfo = json.decode(response.body);
       print(profileInfo.toString());
+
+      sendDateToDatebase(kakaoToken);
 
       setState(() {
         loginPlatform = LoginPlatform.kakao;
@@ -86,12 +87,32 @@ class _loginpageState extends State<loginpage> {
     });
   }
 
-  // void sendDateToDatebase(String token) async {
-  //   String accesstoken  = kakaoToken;
+  void sendDateToDatebase(String token) async {
+    final tokenData = token;
+    Map<String, dynamic> body = {
+      'access_token' : tokenData
+    };
+    String jsonBody = json.encode(body); // json 형식으로 변환
 
-  //   Map<String, String> body = {'data' : data};
-  //   String jsonbody = json.encode(body);
-  // }
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers:  <String, String>{
+          'Content-Type' : 'application/json; charset=utf8',
+        },
+        body: jsonBody
+      );
+      if (response.statusCode == 200) {
+        print('send');
+      }
+      else {
+        print('error ${response.statusCode}');
+      }
+    }
+    catch (error) {
+      print('send error : $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
