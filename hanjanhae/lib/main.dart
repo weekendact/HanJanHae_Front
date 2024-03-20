@@ -5,7 +5,7 @@ import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
 
 void main() {
-  KakaoSdk.init(nativeAppKey: 'f54eff33e9760d2c54bf28c39f04acb0');
+  KakaoSdk.init(nativeAppKey: '61c625d463e984405890bd99a3030f99');
   runApp(const hanjanhae());
 }
 

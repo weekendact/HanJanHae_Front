@@ -43,12 +43,9 @@ class _loginpageState extends State<loginpage> {
 
       final kakaoToken = token.accessToken;
       final kakaoReToken = token.refreshToken;
-
-      print(kakaoToken);
-      print(kakaoReToken);
-
       final profileInfo = json.decode(response.body);
-      print(profileInfo.toString());
+     
+     http
 
       sendDateToDatebase(kakaoToken);
 
