@@ -1,7 +1,97 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'dart:io';
 
-class loginpage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:hanjanhae/pages/MainPage.dart';
+import 'package:http/http.dart' as http;
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+
+enum LoginPlatform {
+  kakao,
+  google,
+  naver,
+  none,
+}
+
+// String _accessTokenUser = AccessTokenInfo.fromJson(u).toString();
+
+class loginpage extends StatefulWidget {
   const loginpage({super.key});
+
+  @override
+  State<loginpage> createState() => _loginpageState();
+}
+
+class _loginpageState extends State<loginpage> {
+  LoginPlatform loginPlatform = LoginPlatform.none;
+  final String apiUrl = '데이터베이스 엔드 포인트 주소';
+
+  void signInWithKakao() async {
+    try {
+      bool isInstalled = await isKakaoTalkInstalled();
+      OAuthToken token = isInstalled
+          ? await UserApi.instance.loginWithKakaoTalk()
+          : await UserApi.instance.loginWithKakaoAccount();
+
+      final url = Uri.https('kapi.kakao.com', '/v2/user/me');
+
+      final response = await http.get(
+        url,
+        headers: {
+          HttpHeaders.authorizationHeader: 'Bearer ${token.accessToken}'
+        },
+      );
+
+      final kakaoToken = token.accessToken;
+      final kakaoReToken = token.refreshToken;
+
+      print(kakaoToken);
+      print(kakaoReToken);
+
+      final profileInfo = json.decode(response.body);
+      print(profileInfo.toString());
+
+      setState(() {
+        loginPlatform = LoginPlatform.kakao;
+      });
+      navigateToHomePage();
+    } catch (error) {
+      print('카카오톡으로 로그인 실패 $error');
+    }
+  }
+
+  void navigateToHomePage() {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const mainpage(),
+      ),
+    );
+  }
+
+  void signOut() async {
+    switch (loginPlatform) {
+      case LoginPlatform.google:
+        break;
+      case LoginPlatform.kakao:
+        await UserApi.instance.logout();
+        break;
+      case LoginPlatform.naver:
+        break;
+      case LoginPlatform.none:
+        break;
+    }
+
+    setState(() {
+      loginPlatform = LoginPlatform.none;
+    });
+  }
+
+  // void sendDateToDatebase(String token) async {
+  //   String accesstoken  = kakaoToken;
+
+  //   Map<String, String> body = {'data' : data};
+  //   String jsonbody = json.encode(body);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +117,7 @@ class loginpage extends StatelessWidget {
                 ),
               ),
               Container(
+                // 카카오 계정 로그인 버튼
                 height: 50.0,
                 width: 300.0,
                 decoration: BoxDecoration(
@@ -39,7 +130,12 @@ class loginpage extends StatelessWidget {
                   bottom: 15.0,
                 ),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    loginPlatform != LoginPlatform.none
+                        ? navigateToHomePage()
+                        : signInWithKakao();
+                    //  print('${}');
+                  },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -60,6 +156,7 @@ class loginpage extends StatelessWidget {
                 ),
               ),
               Container(
+                // 구글 계정 로그인 버튼
                 height: 50.0,
                 width: 300.0,
                 decoration: BoxDecoration(
@@ -97,6 +194,7 @@ class loginpage extends StatelessWidget {
                 ),
               ),
               Container(
+                // 네이버 계정 로그인 버튼
                 height: 50.0,
                 width: 300.0,
                 decoration: BoxDecoration(

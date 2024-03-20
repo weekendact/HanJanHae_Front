@@ -5,3 +5,32 @@
     -->
     <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.study.social_login_app">
+   <application
+        android:label="social_login_app"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher">
+       .
+       .
+       .
+       <-- 추가 -->
+       <activity
+           android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity"
+           android:exported="true">
+           <intent-filter android:label="flutter_web_auth">
+               <action android:name="android.intent.action.VIEW" />
+               <category android:name="android.intent.category.DEFAULT" />
+               <category android:name="android.intent.category.BROWSABLE" />
+
+               <!-- Redirect URI, "kakao${YOUR_NATIVE_APP_KEY}://oauth" 형식 -->
+               <data android:scheme="f54eff33e9760d2c54bf28c39f04acb0" android:host="oauth"/>
+           </intent-filter>
+       </activity>
+       
+       .
+       .
+       .
+    </application>
+</manifest>
