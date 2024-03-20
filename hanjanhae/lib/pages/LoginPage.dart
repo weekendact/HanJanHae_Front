@@ -23,7 +23,7 @@ class loginpage extends StatefulWidget {
 
 class _loginpageState extends State<loginpage> {
   LoginPlatform loginPlatform = LoginPlatform.none;
-  final String apiUrl = 'http://localhost:8080/user/signup';
+  final String apiUrl = 'http://localhost:8080/user/signup'; // 데이터베이스 엔드 포인트
 
   void signInWithKakao() async {
     try {
