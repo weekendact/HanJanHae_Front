@@ -23,7 +23,7 @@ class loginpage extends StatefulWidget {
 
 class _loginpageState extends State<loginpage> {
   LoginPlatform loginPlatform = LoginPlatform.none;
-  final String apiUrl = 'http://localhost:8080/user/signup'; // 데이터베이스 엔드 포인트
+  final String kakaoapiUrl = 'http://localhost:8080/user/signup'; // 카카오 로그인 데이터베이스 엔드 포인트
 
   void signInWithKakao() async {
     try {
@@ -43,11 +43,9 @@ class _loginpageState extends State<loginpage> {
 
       final kakaoToken = token.accessToken;
       final kakaoReToken = token.refreshToken;
-      final profileInfo = json.decode(response.body);
-     
-     http
+      final kakaoInfo = json.decode(response.body);
 
-      sendDateToDatebase(kakaoToken);
+      sendDateToDatebase(kakaoToken, kakaoInfo);
 
       setState(() {
         loginPlatform = LoginPlatform.kakao;
@@ -84,18 +82,19 @@ class _loginpageState extends State<loginpage> {
     });
   }
 
-  void sendDateToDatebase(String token) async {
+  void sendDateToDatebase(String token, dynamic kakaoInfo) async {
     final tokenData = token;
     Map<String, dynamic> body = {
-      'access_token' : tokenData
+      'access_token' : tokenData,
+      'kakaoInfo' : kakaoInfo,
     };
     String jsonBody = json.encode(body); // json 형식으로 변환
 
     try {
       final response = await http.post(
-        Uri.parse(apiUrl),
+        Uri.parse(kakaoapiUrl),
         headers:  <String, String>{
-          'Content-Type' : 'application/json; charset=utf8',
+          'Content-Type' : 'application/json; charset=UTF-8',
         },
         body: jsonBody
       );
