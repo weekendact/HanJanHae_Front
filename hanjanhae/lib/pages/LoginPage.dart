@@ -25,7 +25,7 @@ class _loginpageState extends State<loginpage> {
   LoginPlatform loginPlatform = LoginPlatform.none;
   final String kakaoapiUrl = 'http://localhost:8080/user/signup'; // 카카오 로그인 데이터베이스 엔드 포인트
 
-  void signInWithKakao() async {
+  void signInWithKakao() async { // 카카오 로그인
     try {
       bool isInstalled = await isKakaoTalkInstalled();
       OAuthToken token = isInstalled
@@ -42,21 +42,20 @@ class _loginpageState extends State<loginpage> {
       );
 
       final kakaoToken = token.accessToken;
-      final kakaoReToken = token.refreshToken;
       final kakaoInfo = json.decode(response.body);
 
-      sendDateToDatebase(kakaoToken, kakaoInfo);
+      sendDateToDatebase(kakaoToken, kakaoInfo); // 데이터베이스 전송
 
       setState(() {
         loginPlatform = LoginPlatform.kakao;
       });
-      navigateToHomePage();
+      navigateToHomePage(); // 홈페이지 이동
     } catch (error) {
       print('카카오톡으로 로그인 실패 $error');
     }
   }
 
-  void navigateToHomePage() {
+  void navigateToHomePage() { // 홈페이지 이동
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (context) => const mainpage(),
@@ -82,7 +81,7 @@ class _loginpageState extends State<loginpage> {
     });
   }
 
-  void sendDateToDatebase(String token, dynamic kakaoInfo) async {
+  void sendDateToDatebase(String token, dynamic kakaoInfo) async { // 데이터베이스 이동
     final tokenData = token;
     Map<String, dynamic> body = {
       'access_token' : tokenData,
