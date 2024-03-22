@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hanjanhae/pages/MainPage.dart';
 import 'package:http/http.dart' as http;
-import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart'; // 카카오 로그인 패키지
+import 'package:google_sign_in/google_sign_in.dart'; // 구글 로그인 패키지
 
 enum LoginPlatform {
   kakao,
@@ -24,6 +25,7 @@ class loginpage extends StatefulWidget {
 class _loginpageState extends State<loginpage> {
   LoginPlatform loginPlatform = LoginPlatform.none;
   final String kakaoapiUrl = 'http://localhost:8080/user/signup'; // 카카오 로그인 데이터베이스 엔드 포인트
+  final String googleapiUrl = ''; // 구글 로그인 데이터베이스 엔드 포인트
 
   void signInWithKakao() async { // 카카오 로그인
     try {
@@ -44,16 +46,38 @@ class _loginpageState extends State<loginpage> {
       final kakaoToken = token.accessToken;
       final kakaoInfo = json.decode(response.body);
 
-      sendDateToDatebase(kakaoToken, kakaoInfo); // 데이터베이스 전송
-
       setState(() {
         loginPlatform = LoginPlatform.kakao;
       });
+
+      sendDateToDatebase(kakaoToken, kakaoInfo); // 데이터베이스 전송
+
       navigateToHomePage(); // 홈페이지 이동
     } catch (error) {
       print('카카오톡으로 로그인 실패 $error');
     }
   }
+
+  void signInWithGoogle() async { // 구글 로그인
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAuthentication googleUserToken = await googleUser!.authentication;
+
+    print('accessToken = ${googleUserToken.accessToken}');
+    print('name = ${googleUser.displayName}');
+    print('email = ${googleUser.email}');
+    print('id = ${googleUser.id}');
+    print('tostring = ${googleUser.toString()}');
+
+    final googleToken = googleUserToken.accessToken;
+
+    setState(() {
+      loginPlatform = LoginPlatform.google;
+    });
+
+    sendDateToDatebase(googleToken, googleUser);
+
+    navigateToHomePage();
+    }
 
   void navigateToHomePage() { // 홈페이지 이동
     Navigator.of(context).pushReplacement(
@@ -66,6 +90,7 @@ class _loginpageState extends State<loginpage> {
   void signOut() async {
     switch (loginPlatform) {
       case LoginPlatform.google:
+        await GoogleSignIn().signOut();
         break;
       case LoginPlatform.kakao:
         await UserApi.instance.logout();
@@ -81,31 +106,61 @@ class _loginpageState extends State<loginpage> {
     });
   }
 
-  void sendDateToDatebase(String token, dynamic kakaoInfo) async { // 데이터베이스 이동
+  void sendDateToDatebase(dynamic token, dynamic Info) async { // 데이터베이스 이동
     final tokenData = token;
-    Map<String, dynamic> body = {
-      'access_token' : tokenData,
-      'kakaoInfo' : kakaoInfo,
-    };
-    String jsonBody = json.encode(body); // json 형식으로 변환
-
-    try {
-      final response = await http.post(
-        Uri.parse(kakaoapiUrl),
-        headers:  <String, String>{
-          'Content-Type' : 'application/json; charset=UTF-8',
-        },
-        body: jsonBody
-      );
-      if (response.statusCode == 200) {
-        print('send');
+    if (loginPlatform == LoginPlatform.kakao) { // 카카오
+      Map<String, dynamic> kakaoBody = {
+        'access_token' : tokenData,
+        'kakaoInfo' : Info,
+      };
+      String jsonKakaoBody = json.encode(kakaoBody); // json 형식으로 변환
+      
+      try {
+        final kakaoResponse = await http.post(
+          Uri.parse(kakaoapiUrl),
+          headers:  <String, String> {
+            'Content-Type' : 'application/json; charset=UTF-8',
+          },
+          body: jsonKakaoBody
+        );
+        if (kakaoResponse.statusCode == 200) {
+          print('send');
+        }
+        else {
+          print('error ${kakaoResponse.statusCode}');
+        }
       }
-      else {
-        print('error ${response.statusCode}');
+      catch (error) {
+        print('send error : $error');
       }
     }
-    catch (error) {
-      print('send error : $error');
+    else if(loginPlatform == LoginPlatform.google) { // 구글
+      Map<String, dynamic> googleBody = {
+        'access_token' : tokenData,
+        'user_id' : Info.id,
+        'user_email' :Info.email,
+      };
+
+      String jsonGoogleBody = json.encode(googleBody); // json 형식 변환
+
+      try {
+        final googleResponse = await http.post(
+          Uri.parse(googleapiUrl),
+          headers: <String, String> {
+            'Content-Type' : 'application/json; charset=UTF-8',
+          },
+          body: jsonGoogleBody
+        );
+        if(googleResponse.statusCode == 200) {
+          print('send');
+        }
+        else {
+          print('error ${googleResponse.statusCode}');
+        }
+      }
+      catch (error) {
+        print('send error : $error');
+      }
     }
   }
 
@@ -189,7 +244,11 @@ class _loginpageState extends State<loginpage> {
                   bottom: 15.0,
                 ),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    loginPlatform != LoginPlatform.none
+                        ? navigateToHomePage()
+                        : signInWithGoogle();
+                  },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [

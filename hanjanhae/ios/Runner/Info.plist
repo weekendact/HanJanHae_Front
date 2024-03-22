@@ -56,5 +56,26 @@
       </array>
       </dict>
     </array>
+
+	<key>CFBundleURLTypes</key>
+	<array>
+	<dict>
+		<key>CFBundleTypeRole</key>
+		<string>Editor</string>
+		<key>CFBundleURLSchemes</key>
+		<array>
+		<!-- google login -->
+			<string>com.googleusercontent.apps.403318662698-mkrpphq0quudollhdp5djspfhmlo4vsj</string>
+		</array>
+		<key>keychain-access-groups</key>
+		<array>
+			<string>403318662698-mkrpphq0quudollhdp5djspfhmlo4vsj.apps.googleusercontent.com</string>
+		</array>
+
+		<key>GIDSignInClientID</key>
+		<string>403318662698-mkrpphq0quudollhdp5djspfhmlo4vsj.apps.googleusercontent.com</string>
+
+	</dict>
+	</array>
 </dict>
 </plist>
