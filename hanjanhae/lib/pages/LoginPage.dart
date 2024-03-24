@@ -5,6 +5,7 @@ import 'package:hanjanhae/pages/MainPage.dart';
 import 'package:http/http.dart' as http;
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart'; // 카카오 로그인 패키지
 import 'package:google_sign_in/google_sign_in.dart'; // 구글 로그인 패키지
+import 'package:flutter_naver_login/flutter_naver_login.dart';
 
 enum LoginPlatform {
   kakao,
@@ -26,6 +27,7 @@ class _loginpageState extends State<loginpage> {
   LoginPlatform loginPlatform = LoginPlatform.none;
   final String kakaoapiUrl = 'http://localhost:8080/user/signup'; // 카카오 로그인 데이터베이스 엔드 포인트
   final String googleapiUrl = ''; // 구글 로그인 데이터베이스 엔드 포인트
+  final String naverapiUrl = ''; // 네이버 로그인 데이터베이스 엔드 포인트
 
   void signInWithKakao() async { // 카카오 로그인
     try {
@@ -43,11 +45,11 @@ class _loginpageState extends State<loginpage> {
         },
       );
 
-      final kakaoToken = token.accessToken;
+      final kakaoToken = token.accessToken; // 카카오 엑세스 토큰
       final kakaoInfo = json.decode(response.body);
 
       setState(() {
-        loginPlatform = LoginPlatform.kakao;
+        loginPlatform = LoginPlatform.kakao; // 플랫폼 카카오
       });
 
       sendDateToDatebase(kakaoToken, kakaoInfo); // 데이터베이스 전송
@@ -61,25 +63,34 @@ class _loginpageState extends State<loginpage> {
   void signInWithGoogle() async { // 구글 로그인
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     final GoogleSignInAuthentication googleUserToken = await googleUser!.authentication;
-
-    print('accessToken = ${googleUserToken.accessToken}');
-    print('name = ${googleUser.displayName}');
-    print('email = ${googleUser.email}');
-    print('id = ${googleUser.id}');
-    print('tostring = ${googleUser.toString()}');
-
-    final googleToken = googleUserToken.accessToken;
+    final googleToken = googleUserToken.accessToken; // 구글 엑세스 토큰
 
     setState(() {
-      loginPlatform = LoginPlatform.google;
+      loginPlatform = LoginPlatform.google; // 플랫폼 구글
     });
 
-    sendDateToDatebase(googleToken, googleUser);
+    sendDateToDatebase(googleToken, googleUser); // 데이터베이스 전송
 
-    navigateToHomePage();
+    navigateToHomePage(); // 홈페이지 이동
+  }
+
+  void signInWithNaver() async { // 네이버 로그인
+    final NaverLoginResult naverResult = await FlutterNaverLogin.logIn();
+
+    if (naverResult.status == NaverLoginStatus.loggedIn) {
+      print('accesToken = ${naverResult.accessToken}');
+      print('id = ${naverResult..account.id}');
+      print('email = ${naverResult.account.email}');
+      print('name = ${naverResult.account.name}');
+      print('info = ${naverResult.account}');
+
+      setState(() {
+        loginPlatform = LoginPlatform.naver;
+      });
     }
+  }
 
-  void navigateToHomePage() { // 홈페이지 이동
+  void navigateToHomePage() { // 홈페이지 이동 함수
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (context) => const mainpage(),
@@ -87,7 +98,7 @@ class _loginpageState extends State<loginpage> {
     );
   }
 
-  void signOut() async {
+  void signOut() async { // 로그아웃 함수
     switch (loginPlatform) {
       case LoginPlatform.google:
         await GoogleSignIn().signOut();
@@ -96,6 +107,7 @@ class _loginpageState extends State<loginpage> {
         await UserApi.instance.logout();
         break;
       case LoginPlatform.naver:
+        await FlutterNaverLogin.logOut();
         break;
       case LoginPlatform.none:
         break;
@@ -106,7 +118,7 @@ class _loginpageState extends State<loginpage> {
     });
   }
 
-  void sendDateToDatebase(dynamic token, dynamic Info) async { // 데이터베이스 이동
+  void sendDateToDatebase(dynamic token, dynamic Info) async { // 데이터베이스 이동 함수
     final tokenData = token;
     if (loginPlatform == LoginPlatform.kakao) { // 카카오
       Map<String, dynamic> kakaoBody = {
@@ -282,7 +294,11 @@ class _loginpageState extends State<loginpage> {
                   bottom: 15.0,
                 ),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    loginPlatform != LoginPlatform.none
+                    ? navigateToHomePage()
+                    : signInWithNaver();
+                  },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [

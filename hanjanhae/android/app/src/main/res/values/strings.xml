@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!-- 네이버 로그인 -->
+    <string name="client_id">hDF_A1AnQHW1NH280dD0</string>
+    <string name="client_secret">_PtzfDR9iO</string>
+    <string name="client_name">hanjanhae</string>
+</resources>
