@@ -78,15 +78,20 @@ class _loginpageState extends State<loginpage> {
     final NaverLoginResult naverResult = await FlutterNaverLogin.logIn();
 
     if (naverResult.status == NaverLoginStatus.loggedIn) {
-      print('accesToken = ${naverResult.accessToken}');
-      print('id = ${naverResult..account.id}');
-      print('email = ${naverResult.account.email}');
-      print('name = ${naverResult.account.name}');
-      print('info = ${naverResult.account}');
+      // print('accesToken = ${naverResult.accessToken.accessToken}');
+      // print('id = ${naverResult.account.id}');
+      // print('email = ${naverResult.account.email}');
+      // print('name = ${naverResult.account.name}');
+      // print('info = ${naverResult.account}');
+      final naverToken = naverResult.accessToken;
 
       setState(() {
         loginPlatform = LoginPlatform.naver;
       });
+
+      sendDateToDatebase(naverToken, naverResult);
+
+      navigateToHomePage();
     }
   }
 
@@ -168,6 +173,34 @@ class _loginpageState extends State<loginpage> {
         }
         else {
           print('error ${googleResponse.statusCode}');
+        }
+      }
+      catch (error) {
+        print('send error : $error');
+      }
+    }
+    else if(loginPlatform == LoginPlatform.naver) { // 네이버
+      Map<String, dynamic> naverBody = {
+        'access_token' : tokenData,
+        'user_id' : Info.account.id,
+        'user_email' :Info.account.email,
+      };
+
+      String jsonGoogleBody = json.encode(naverBody); // json 형식 변환
+
+      try {
+        final naverResponse = await http.post(
+          Uri.parse(naverapiUrl),
+          headers: <String, String> {
+            'Content-Type' : 'application/json; charset=UTF-8',
+          },
+          body: jsonGoogleBody
+        );
+        if(naverResponse.statusCode == 200) {
+          print('send');
+        }
+        else {
+          print('error ${naverResponse.statusCode}');
         }
       }
       catch (error) {
