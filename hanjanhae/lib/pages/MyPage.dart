@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hanjanhae/pages/SettingPage.dart';
 
 class mypage extends StatefulWidget {
   const mypage({super.key});
@@ -16,9 +17,12 @@ class _mypageState extends State<mypage> {
         actions: [
           IconButton(
             onPressed: () {
-              /*
-                설정 페이지 이동 구현 위치
-               */
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const settingspage(),
+                ),
+              );
             },
             icon: const Icon(Icons.settings),
           ),

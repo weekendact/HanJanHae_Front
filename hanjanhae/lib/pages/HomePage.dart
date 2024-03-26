@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hanjanhae/pages/AIChatPage.dart';
 import 'package:hanjanhae/pages/SearchPage.dart';
 
 class homepage extends StatefulWidget {
@@ -36,7 +37,6 @@ class _homepageState extends State<homepage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -161,6 +161,12 @@ class _homepageState extends State<homepage> {
                     ),
                     InkWell(
                       onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const aichatpage(),
+                          ),
+                        );
                       },
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10.0),
