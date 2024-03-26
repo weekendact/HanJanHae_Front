@@ -45,14 +45,14 @@ class _loginpageState extends State<loginpage> {
         },
       );
 
-      final kakaoToken = token.accessToken; // 카카오 엑세스 토큰
+      // final kakaoToken = token.accessToken; // 카카오 엑세스 토큰
       final kakaoInfo = json.decode(response.body);
 
       setState(() {
         loginPlatform = LoginPlatform.kakao; // 플랫폼 카카오
       });
 
-      sendDateToDatebase(kakaoToken, kakaoInfo); // 데이터베이스 전송
+      sendDateToDatebase(kakaoInfo); // 데이터베이스 전송
 
       navigateToHomePage(); // 홈페이지 이동
     } catch (error) {
@@ -62,14 +62,14 @@ class _loginpageState extends State<loginpage> {
 
   void signInWithGoogle() async { // 구글 로그인
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    final GoogleSignInAuthentication googleUserToken = await googleUser!.authentication;
-    final googleToken = googleUserToken.accessToken; // 구글 엑세스 토큰
+    // final GoogleSignInAuthentication googleUserToken = await googleUser!.authentication;
+    // final googleToken = googleUserToken.accessToken; // 구글 엑세스 토큰
 
     setState(() {
       loginPlatform = LoginPlatform.google; // 플랫폼 구글
     });
 
-    sendDateToDatebase(googleToken, googleUser); // 데이터베이스 전송
+    sendDateToDatebase(googleUser); // 데이터베이스 전송
 
     navigateToHomePage(); // 홈페이지 이동
   }
@@ -83,13 +83,13 @@ class _loginpageState extends State<loginpage> {
       print('email = ${naverResult.account.email}');
       print('name = ${naverResult.account.name}');
       print('info = ${naverResult.account}');
-      final naverToken = naverResult.accessToken;
+      // final naverToken = naverResult.accessToken; // 네이버 엑세스 토큰
 
       setState(() {
         loginPlatform = LoginPlatform.naver;
       });
 
-      sendDateToDatebase(naverToken, naverResult); // 데이터베이스 전송
+      sendDateToDatebase(naverResult); // 데이터베이스 전송
 
       navigateToHomePage();
     }
@@ -123,12 +123,9 @@ class _loginpageState extends State<loginpage> {
     });
   }
 
-  void sendDateToDatebase(dynamic token, dynamic Info) async { // 데이터베이스 이동 함수
-    final tokenData = token;
-    if (loginPlatform == LoginPlatform.kakao) { // 카카오
+  void sendDateToDatebase(dynamic Info) async { // 데이터베이스 이동 함수
       Map<String, dynamic> kakaoBody = {
-        'access_token' : tokenData,
-        'kakaoInfo' : Info,
+        'Info' : Info,
       };
       String jsonKakaoBody = json.encode(kakaoBody); // json 형식으로 변환
       
@@ -150,63 +147,6 @@ class _loginpageState extends State<loginpage> {
       catch (error) {
         print('send error : $error');
       }
-    }
-    else if(loginPlatform == LoginPlatform.google) { // 구글
-      Map<String, dynamic> googleBody = {
-        'access_token' : tokenData,
-        'user_id' : Info.id,
-        'user_email' :Info.email,
-      };
-
-      String jsonGoogleBody = json.encode(googleBody); // json 형식 변환
-
-      try {
-        final googleResponse = await http.post(
-          Uri.parse(googleapiUrl),
-          headers: <String, String> {
-            'Content-Type' : 'application/json; charset=UTF-8',
-          },
-          body: jsonGoogleBody
-        );
-        if(googleResponse.statusCode == 200) {
-          print('send');
-        }
-        else {
-          print('error ${googleResponse.statusCode}');
-        }
-      }
-      catch (error) {
-        print('send error : $error');
-      }
-    }
-    else if(loginPlatform == LoginPlatform.naver) { // 네이버
-      Map<String, dynamic> naverBody = {
-        'access_token' : tokenData,
-        'user_id' : Info.account.id,
-        'user_email' :Info.account.email,
-      };
-
-      String jsonGoogleBody = json.encode(naverBody); // json 형식 변환
-
-      try {
-        final naverResponse = await http.post(
-          Uri.parse(naverapiUrl),
-          headers: <String, String> {
-            'Content-Type' : 'application/json; charset=UTF-8',
-          },
-          body: jsonGoogleBody
-        );
-        if(naverResponse.statusCode == 200) {
-          print('send');
-        }
-        else {
-          print('error ${naverResponse.statusCode}');
-        }
-      }
-      catch (error) {
-        print('send error : $error');
-      }
-    }
   }
 
   @override
