@@ -78,18 +78,18 @@ class _loginpageState extends State<loginpage> {
     final NaverLoginResult naverResult = await FlutterNaverLogin.logIn();
 
     if (naverResult.status == NaverLoginStatus.loggedIn) {
-      // print('accesToken = ${naverResult.accessToken.accessToken}');
-      // print('id = ${naverResult.account.id}');
-      // print('email = ${naverResult.account.email}');
-      // print('name = ${naverResult.account.name}');
-      // print('info = ${naverResult.account}');
+      print('accesToken = ${naverResult.accessToken.accessToken}');
+      print('id = ${naverResult.account.id}');
+      print('email = ${naverResult.account.email}');
+      print('name = ${naverResult.account.name}');
+      print('info = ${naverResult.account}');
       final naverToken = naverResult.accessToken;
 
       setState(() {
         loginPlatform = LoginPlatform.naver;
       });
 
-      sendDateToDatebase(naverToken, naverResult);
+      sendDateToDatebase(naverToken, naverResult); // 데이터베이스 전송
 
       navigateToHomePage();
     }

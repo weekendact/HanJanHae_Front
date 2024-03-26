@@ -15,6 +15,16 @@ class homepage extends StatefulWidget {
 class _homepageState extends State<homepage> {
   int current = 0;
   Color iconColor = Colors.grey;
+  int likes1 = 0; //좋아요버튼 1
+  int likes2 = 0; //좋아요버튼 2
+  int likes3 = 0; //좋아요버튼 3
+  int likes4 = 0; //좋아요버튼 4
+  int likes5 = 0; //좋아요버튼 4
+  Color iconColor1 = Colors.grey; //좋아요버튼 초기값 색1
+  Color iconColor2 = Colors.grey; //좋아요버튼 초기값 색2
+  Color iconColor3 = Colors.grey; //좋아요버튼 초기값 색3
+  Color iconColor4 = Colors.grey; //좋아요버튼 초기값 색4
+  Color iconColor5 = Colors.grey; //좋아요버튼 초기값 색5
   final CarouselController _controller = CarouselController();
   List imageList = [
     "assets/cocktail.jpeg",
@@ -208,26 +218,28 @@ class _homepageState extends State<homepage> {
   Widget sliderWidget() {
     return CarouselSlider(
       carouselController: _controller,
-      items: imageList.map(
-        (imgLink) {
+      items: imageList.asMap().entries.map(
+        (entry) {
+          int index = entry.key;
+          String imgLink = entry.value;
           return Builder(
             builder: (context) {
               return Stack(children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(20.0),
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Image(
-                      fit: BoxFit.contain,
+                      fit: BoxFit.cover,
                       image: AssetImage(imgLink),
+                      height: 300,
                     ),
                   ),
                 ),
                 Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: 50.0,
-                  child: hotcocktailname(),
+                  top: 170,
+                  left: 53,
+                  child: hotcocktailname(index),
                 )
               ]);
             },
@@ -248,7 +260,27 @@ class _homepageState extends State<homepage> {
     );
   }
 
-  Widget hotcocktailname() {
+  Widget hotcocktailname(int index) {
+    String cocktailName = '';
+    switch (index) {
+      case 0:
+        cocktailName = '스카치블루';
+
+        break;
+      case 1:
+        cocktailName = '마티니';
+        break;
+      case 2:
+        cocktailName = '모히또';
+        break;
+      case 3:
+        cocktailName = '칵테일';
+        break;
+      case 4:
+        cocktailName = '맥주';
+        break;
+    }
+
     return Center(
       child: Stack(children: [
         SizedBox(
@@ -257,74 +289,255 @@ class _homepageState extends State<homepage> {
           child: ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.white.withOpacity(0.70),
+              backgroundColor: Colors.white.withOpacity(0.80),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(20.0),
               ),
             ),
-            child: const Align(
-              alignment: Alignment.centerLeft,
-              child: Column(
+            child: Row(
+              children: [
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '스카치블루',
-                      style: TextStyle(fontSize: 16, color: Colors.black),
+                      cocktailName,
+                      style: const TextStyle(fontSize: 16, color: Colors.black),
                     ),
-                    Text(
-                      '부제목',
-                      style: TextStyle(fontSize: 10, color: Colors.grey),
-                    ),
-                  ]),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
         Positioned(
           top: 15,
-          left: 120,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(25.0),
-            ),
-            width: 60,
-            height: 30,
-            child: Row(children: [
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    setState(() {
-                      if (iconColor == Colors.grey) {
-                        iconColor = Colors.blue;
-                      } else {
-                        iconColor = Colors.grey;
-                      }
-                    });
-                  },
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.thumb_up,
-                        size: 15,
-                        color: iconColor,
-                      ),
-                      const Expanded(
-                          child: Center(
-                        child: null,
-                      )),
-                      const Text(
-                        '100',
-                        style: TextStyle(fontSize: 10),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ]),
-          ),
+          right: 20,
+          child: goodbuttonlist(index),
         ),
       ]),
+    );
+  }
+
+  Widget goodbuttonlist(int index) {
+    switch (index) {
+      case 0:
+        return goodbutton1(index);
+      case 1:
+        return goodbutton2(index);
+      case 2:
+        return goodbutton3(index);
+      case 3:
+        return goodbutton4(index);
+      case 4:
+        return goodbutton5(index);
+      default:
+        return Container();
+    }
+  }
+
+  Widget goodbutton1(int index) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(25.0),
+      ),
+      width: 60,
+      height: 30,
+      child: TextButton(
+        onPressed: () {
+          setState(() {
+            if (iconColor1 == Colors.grey) {
+              iconColor1 = Colors.blue;
+              likes1++;
+            } else {
+              iconColor1 = Colors.grey;
+              likes1--;
+            }
+          });
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.thumb_up,
+              size: 14,
+              color: iconColor1,
+            ),
+            const SizedBox(
+              width: 3,
+            ),
+            Text(
+              '$likes1',
+              style: const TextStyle(fontSize: 11),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget goodbutton2(int index) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(25.0),
+      ),
+      width: 60,
+      height: 30,
+      child: TextButton(
+        onPressed: () {
+          setState(() {
+            if (iconColor2 == Colors.grey) {
+              iconColor2 = Colors.blue;
+              likes2++;
+            } else {
+              iconColor2 = Colors.grey;
+              likes2--;
+            }
+          });
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.thumb_up,
+              size: 14,
+              color: iconColor2,
+            ),
+            const SizedBox(
+              width: 3,
+            ),
+            Text(
+              '$likes2',
+              style: const TextStyle(fontSize: 11),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget goodbutton3(int index) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(25.0),
+      ),
+      width: 60,
+      height: 30,
+      child: TextButton(
+        onPressed: () {
+          setState(() {
+            if (iconColor3 == Colors.grey) {
+              iconColor3 = Colors.blue;
+              likes3++;
+            } else {
+              iconColor3 = Colors.grey;
+              likes3--;
+            }
+          });
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.thumb_up,
+              size: 14,
+              color: iconColor3,
+            ),
+            const SizedBox(
+              width: 3,
+            ),
+            Text(
+              '$likes3',
+              style: const TextStyle(fontSize: 11),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget goodbutton4(int index) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(25.0),
+      ),
+      width: 60,
+      height: 30,
+      child: TextButton(
+        onPressed: () {
+          setState(() {
+            if (iconColor4 == Colors.grey) {
+              iconColor4 = Colors.blue;
+              likes4++;
+            } else {
+              iconColor4 = Colors.grey;
+              likes4--;
+            }
+          });
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.thumb_up,
+              size: 14,
+              color: iconColor4,
+            ),
+            const SizedBox(
+              width: 3,
+            ),
+            Text(
+              '$likes4',
+              style: const TextStyle(fontSize: 11),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget goodbutton5(int index) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(25.0),
+      ),
+      width: 60,
+      height: 30,
+      child: TextButton(
+        onPressed: () {
+          setState(() {
+            if (iconColor5 == Colors.grey) {
+              iconColor5 = Colors.blue;
+              likes5++;
+            } else {
+              iconColor5 = Colors.grey;
+              likes5--;
+            }
+          });
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.thumb_up,
+              size: 14,
+              color: iconColor5,
+            ),
+            const SizedBox(
+              width: 3,
+            ),
+            Text(
+              '$likes5',
+              style: const TextStyle(fontSize: 11),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
