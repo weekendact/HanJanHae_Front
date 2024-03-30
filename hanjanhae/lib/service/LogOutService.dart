@@ -21,7 +21,7 @@ void signOut(BuildContext context) async {
         break;
     }
 
-      loginPlatform = LoginPlatform.none;
+    loginPlatform = LoginPlatform.none;
 
     navigateToLogInPage(context);
   }

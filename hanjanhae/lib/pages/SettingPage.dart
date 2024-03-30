@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hanjanhae/service/LogOutService.dart';
+import 'package:hanjanhae/service/userSecureStorageService.dart';
 
 class settingspage extends StatefulWidget {
   const settingspage({super.key});
@@ -28,6 +29,7 @@ class _settingspageState extends State<settingspage> {
               TextButton(
                 onPressed: () async {
                   WidgetsFlutterBinding.ensureInitialized(); // 바인딩
+                  SecureStorageService().removeToken();
                   signOut(context);
                 },
                 child: const Row(

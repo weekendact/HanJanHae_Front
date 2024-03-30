@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:hanjanhae/pages/SettingPage.dart';
 
 class mypage extends StatefulWidget {
@@ -32,30 +31,39 @@ class _mypageState extends State<mypage> {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
-            Row(
+            const Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.account_circle,
                   size: 100.0,
                 ),
-                TextButton(
-                  onPressed: () {
-                    /*
-                      로그인 페이지 이동 구현 위치
-                     */
-                  },
-                  // style: TextButton.styleFrom(foregroundColor: Colors.black,),
-                  child: const Row(
-                    children: [
-                      Text(
-                        "로그인",
-                        style: TextStyle(
-                          fontSize: 30.0,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                      Icon(Icons.arrow_forward_ios),
-                    ],
+                // TextButton(
+                //   onPressed: () {
+                //     /*
+                //       로그인 페이지 이동 구현 위치
+                //      */
+                //   },
+                //   // style: TextButton.styleFrom(foregroundColor: Colors.black,),
+                //   child: const Row(
+                //     children: [
+                //       Text(
+                //         "로그인",
+                //         style: TextStyle(
+                //           fontSize: 30.0,
+                //           decoration: TextDecoration.underline,
+                //         ),
+                //       ),
+                //       Icon(Icons.arrow_forward_ios),
+                //     ],
+                //   ),
+                // ),
+                SizedBox(
+                  width: 10.0,
+                ),
+                Text(
+                  '닉네임',
+                  style: TextStyle(
+                    fontSize: 30.0,
                   ),
                 ),
               ],

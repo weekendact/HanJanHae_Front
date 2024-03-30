@@ -13,12 +13,13 @@ dependencies:
 
   cupertino_icons: ^1.0.6
   carousel_slider: ^4.2.1
-  http: ^1.2.1
+  http: ^1.2.1 # http 통신 패키지
 
   kakao_flutter_sdk_user: ^1.9.0 # 카카오 로그인 패키지
   google_sign_in: ^6.2.1 # 구글 로그인 패키지
-  flutter_naver_login: ^1.8.0 #네이버 로그인 패키지
-  shared_preferences: ^2.2.2
+  flutter_naver_login: ^1.8.0 # 네이버 로그인 패키지
+  flutter_bloc: ^8.1.5 # 상태 관리 패키지
+  flutter_secure_storage: ^9.0.0 # 데이터 암호화 데이터베이스 패키지
 
 dev_dependencies:
   flutter_test:

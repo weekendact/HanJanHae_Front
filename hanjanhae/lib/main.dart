@@ -1,11 +1,9 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:hanjanhae/pages/HomePage.dart';
 import 'package:hanjanhae/pages/LoginPage.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized;
   KakaoSdk.init(nativeAppKey: '61c625d463e984405890bd99a3030f99');
   runApp(const hanjanhae());
 }
@@ -46,22 +44,9 @@ class hanjanhae extends StatelessWidget {
               ),
         ),
       ),
-      // home: const loginpage(),
-      home: FutureBuilder(
-        future: getLoginStatus(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return snapshot.data == true ? const homepage() : const loginpage();
-          } else {
-            return const CircularProgressIndicator();
-          }
-        },
-      ),
+      home: const loginpage(),
     );
   }
 }
 
-Future<bool> getLoginStatus() async {
-  final SharedPreferences prefs = SharedPreferences.getInstance() as SharedPreferences;
-  return prefs.getBool('isLoggedIn') ?? false;
-}
+

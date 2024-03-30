@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-void sendDateToDatebase(dynamic Info, String apiUrl) async {
+void sendDataToDatebase(dynamic Info, String apiUrl) async {
     // 데이터베이스 이동 함수
     Map<String, dynamic> Body = {
       'Info': Info,
