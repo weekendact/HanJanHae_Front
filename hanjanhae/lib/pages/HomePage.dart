@@ -29,9 +29,9 @@ class _homepageState extends State<homepage> {
   final CarouselController _controller = CarouselController();
   List imageList = [
     "assets/cocktail.jpeg",
-    "assets/cocktail.jpeg",
-    "assets/cocktail.jpeg",
-    "assets/cocktail.jpeg",
+    "assets/cocktail1.jpg",
+    "assets/cocktail2.jpg",
+    "assets/cocktail3.jpg",
     "assets/cocktail.jpeg",
   ];
 
@@ -98,33 +98,64 @@ class _homepageState extends State<homepage> {
                     ),
                     ///////////////////////////////////phj//////////////////////////////
                     const SizedBox(
-                      height: 10.0,
+                      height: 50.0,
                     ),
                     const Row(
                       children: [
                         Text(
-                          "입문자들을 위한",
+                          "입문자를 위한",
                           style: TextStyle(
                             fontSize: 15,
                           ),
                         ),
                       ],
                     ),
-                    const Row(
+                    Row(
                       children: [
-                        Text(
+                        const Text(
                           "칵테일 추천",
                           style: TextStyle(
                             fontSize: 25,
                           ),
                         ),
+                        Expanded(child: Container(height: 1, color: Colors.grey, margin: const EdgeInsets.all(15.0),)),
                       ],
                     ),
                     SizedBox(
                         // color: Colors.grey,
                         height: 170.0,
                         width: MediaQuery.of(context).size.width,
-                        child: cocktailcard()),
+                        child: cocktailcard1()),
+
+                        const SizedBox(
+                      height: 30.0,
+                    ),
+                    const Row(
+                      children: [
+                        Text(
+                          "20대를 위한",
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        const Text(
+                          "칵테일 추천",
+                          style: TextStyle(
+                            fontSize: 25,
+                          ),
+                        ),
+                        Expanded(child: Container(height: 1, color: Colors.black,margin: const EdgeInsets.all(15.0),)),
+                      ],
+                    ),
+                    SizedBox(
+                        // color: Colors.grey,
+                        height: 170.0,
+                        width: MediaQuery.of(context).size.width,
+                        child: cocktailcard2()),
                     ///////////////////////////////////cdh//////////////////////////////
                     const SizedBox(
                       height: 50.0,
@@ -619,17 +650,32 @@ class _homepageState extends State<homepage> {
     );
   }
 
-  Widget cocktailcard() {
+  Widget cocktailcard1() {
     return ListView(
       scrollDirection: Axis.horizontal,
       children: [
         _buildCocktailCard(context, 'assets/cocktail1.jpg', "칵테일1"),
-        _buildCocktailCard(context, 'assets/cocktail1.jpg', "칵테일2"),
-        _buildCocktailCard(context, 'assets/cocktail1.jpg', "칵테일3"),
+        _buildCocktailCard(context, 'assets/cocktail2.jpg', "칵테일2"),
+        _buildCocktailCard(context, 'assets/cocktail3.jpg', "칵테일3"),
         _buildCocktailCard(context, 'assets/cocktail1.jpg', "칵테일4"),
-        _buildCocktailCard(context, 'assets/cocktail1.jpg', "칵테일5"),
-        _buildCocktailCard(context, 'assets/cocktail1.jpg', "칵테일6"),
+        _buildCocktailCard(context, 'assets/cocktail2.jpg', "칵테일5"),
+        _buildCocktailCard(context, 'assets/cocktail3.jpg', "칵테일6"),
         _buildCocktailCard(context, 'assets/cocktail1.jpg', "칵테일7"),
+      ],
+    );
+  }
+
+  Widget cocktailcard2() {
+    return ListView(
+      scrollDirection: Axis.horizontal,
+      children: [
+        _buildCocktailCard(context, 'assets/cocktail2.jpg', "칵테일1"),
+        _buildCocktailCard(context, 'assets/cocktail3.jpg', "칵테일2"),
+        _buildCocktailCard(context, 'assets/cocktail1.jpg', "칵테일3"),
+        _buildCocktailCard(context, 'assets/cocktail2.jpg', "칵테일4"),
+        _buildCocktailCard(context, 'assets/cocktail1.jpg', "칵테일5"),
+        _buildCocktailCard(context, 'assets/cocktail2.jpg', "칵테일6"),
+        _buildCocktailCard(context, 'assets/cocktail3.jpg', "칵테일7"),
       ],
     );
   }

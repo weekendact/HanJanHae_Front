@@ -27,7 +27,7 @@ void signInWithKakao(BuildContext context) async {
     loginPlatform = LoginPlatform.kakao; // 플랫폼 카카오
 
     SecureStorageService().saveToken(token.accessToken); // 내부 데이터베이스에 토큰 값 저장
-    sendDataToDatebase(kakaoInfo, kakaoapiUrl); // 데이터베이스 전송
+    sendDataToDatabase(kakaoInfo, kakaoapiUrl); // 데이터베이스 전송
     navigateToHomePage(context); // 홈페이지 이동
 
   } catch (error) {

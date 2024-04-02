@@ -149,7 +149,7 @@ class _mypageState extends State<mypage> {
             ),
             const Row(
               children: [
-                Flexible(
+                Flexible( // 줄 바꿈
                   child: Text(
                     'dataadfsdfasdfsdjhkfhjfdfffsdfsfdsfsdsdfsdkhdfhkfhdhsjgfghjgjhhjgjhgjhgjhgjhgjhggasdfsfsfsjghghjghghjghjghjgfhshjfhsdhkjfhshfhsj',
                     style: TextStyle(

@@ -18,6 +18,6 @@ void signInWithGoogle(BuildContext context) async {
   loginPlatform = LoginPlatform.google; // 플랫폼 구글
 
   SecureStorageService().saveToken(googleUserToken.accessToken); // 내부 데이터베이스에 토큰 값 저장
-  sendDataToDatebase(googleBody, googleapiUrl); // 데이터베이스 전송
+  sendDataToDatabase(googleBody, googleapiUrl); // 데이터베이스 전송
   navigateToHomePage(context); // 홈페이지 이동
 }

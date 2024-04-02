@@ -19,7 +19,7 @@ void signInWithNaver(BuildContext context) async {
     loginPlatform = LoginPlatform.naver;
 
     SecureStorageService().saveToken(naverToken.accessToken); // 내부 데이터베이스에 토큰 값 저장
-    sendDataToDatebase(naverBody, naverapiUrl); // 데이터베이스 전송
+    sendDataToDatabase(naverBody, naverapiUrl); // 데이터베이스 전송
     navigateToHomePage(context); // 홈페이지 이동
   }
 }
