@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hanjanhae/pages/LoginPage.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
+/*
+  내부 데베에서 토큰이 있는지 없는지 확인 후 있으면 로그인 후 메인페이지, 없으면 LoginDetail 페이지
+ */
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized;
   KakaoSdk.init(nativeAppKey: '61c625d463e984405890bd99a3030f99');
@@ -14,6 +18,7 @@ class hanjanhae extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      locale: const Locale('kr', "KR"),
       title: 'hanjanhae Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

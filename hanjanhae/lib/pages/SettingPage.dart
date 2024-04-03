@@ -29,7 +29,7 @@ class _settingspageState extends State<settingspage> {
               TextButton(
                 onPressed: () async {
                   WidgetsFlutterBinding.ensureInitialized(); // 바인딩
-                  SecureStorageService().removeToken();
+                  SecureStorageService().removeAll();
                   signOut(context);
                 },
                 child: const Row(

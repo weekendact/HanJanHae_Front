@@ -59,7 +59,7 @@ class _loginpageState extends State<loginpage> {
                 ),
                 child: TextButton(
                   onPressed: () {
-                    loginPlatform != LoginPlatform.none
+                    loginPlatform == LoginPlatform.kakao
                         ? navigateToHomePage(context)
                         : signInWithKakao(context);
                     //  print('${}');
@@ -102,7 +102,7 @@ class _loginpageState extends State<loginpage> {
                 ),
                 child: TextButton(
                   onPressed: () {
-                    loginPlatform != LoginPlatform.none
+                    loginPlatform == LoginPlatform.google
                         ? navigateToHomePage(context)
                         : signInWithGoogle(context);
                   },
@@ -140,7 +140,7 @@ class _loginpageState extends State<loginpage> {
                 ),
                 child: TextButton(
                   onPressed: () {
-                    loginPlatform != LoginPlatform.none
+                    loginPlatform == LoginPlatform.naver
                         ? navigateToHomePage(context)
                         : signInWithNaver(context);
                   },
