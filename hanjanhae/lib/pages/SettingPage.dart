@@ -1,15 +1,16 @@
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:hanjanhae/service/LogOutService.dart';
 import 'package:hanjanhae/service/userSecureStorageService.dart';
 
-class settingspage extends StatefulWidget {
-  const settingspage({super.key});
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
 
   @override
-  State<settingspage> createState() => _settingspageState();
+  State<SettingsPage> createState() => _SettingsPageState();
 }
 
-class _settingspageState extends State<settingspage> {
+class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +19,9 @@ class _settingspageState extends State<settingspage> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(Icons.arrow_back_ios),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+          ),
         ),
       ),
       body: SafeArea(
@@ -41,7 +44,11 @@ class _settingspageState extends State<settingspage> {
                         // decoration: TextDecoration.underline,
                       ),
                     ),
-                    Expanded(child: Center(child: null,)),
+                    Expanded(
+                      child: Center(
+                        child: null,
+                      ),
+                    ),
                     Icon(
                       Icons.arrow_forward_ios,
                       size: 20,

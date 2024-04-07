@@ -1,3 +1,4 @@
+// ignore_for_file: file_names, use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';

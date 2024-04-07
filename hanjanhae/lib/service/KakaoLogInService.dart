@@ -1,11 +1,12 @@
+// ignore_for_file: file_names, prefer_typing_uninitialized_variables
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:hanjanhae/DatabaseUrlAddresses.dart';
 import 'package:http/http.dart' as http;
 import 'package:hanjanhae/pages/LoginPage.dart';
 import 'package:hanjanhae/service/SendLoginDataToDatabaseService.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
-import 'package:hanjanhae/service/DatabaseUrlAddresses.dart';
 
 void signInWithKakao(BuildContext context) async {
   // 카카오 로그인
@@ -31,10 +32,6 @@ void signInWithKakao(BuildContext context) async {
         kakaoUser['kakao_account']['has_email']) {
       kakaoEmail = kakaoUser['kakao_account']['email'];
     }
-
-    print(kakaoId);
-    print('$kakaoEmail');
-    print('');
 
     sendDataToDatabase(kakaoId, kakaoEmail, loginApiUrl); // 데이터베이스 전송
   } catch (error) {

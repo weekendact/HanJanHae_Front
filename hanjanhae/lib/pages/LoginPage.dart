@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:hanjanhae/service/GoogleLogInService.dart';
 import 'package:hanjanhae/service/KakaoLogInService.dart';
@@ -13,14 +14,14 @@ enum LoginPlatform {
 
 LoginPlatform loginPlatform = LoginPlatform.none;
 
-class loginpage extends StatefulWidget {
-  const loginpage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<loginpage> createState() => _loginpageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _loginpageState extends State<loginpage> {
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,9 +50,7 @@ class _loginpageState extends State<loginpage> {
                 height: 50.0,
                 width: 300.0,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    12.0,
-                  ),
+                  borderRadius: BorderRadius.circular(12.0),
                   color: const Color.fromARGB(255, 254, 229, 0),
                 ),
                 margin: const EdgeInsets.only(
@@ -76,7 +75,9 @@ class _loginpageState extends State<loginpage> {
                         child: Text(
                           '카카오 계정 로그인',
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 15.0),
+                          style: TextStyle(
+                            fontSize: 15.0,
+                          ),
                         ),
                       ),
                     ],
@@ -88,9 +89,7 @@ class _loginpageState extends State<loginpage> {
                 height: 50.0,
                 width: 300.0,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    12.0,
-                  ),
+                  borderRadius: BorderRadius.circular(12.0),
                   border: Border.all(
                     color: Colors.black,
                     width: 0.5,
@@ -118,7 +117,9 @@ class _loginpageState extends State<loginpage> {
                         child: Text(
                           '구글 계정 로그인',
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 15.0),
+                          style: TextStyle(
+                            fontSize: 15.0,
+                          ),
                         ),
                       ),
                     ],
@@ -130,9 +131,7 @@ class _loginpageState extends State<loginpage> {
                 height: 50.0,
                 width: 300.0,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    12.0,
-                  ),
+                  borderRadius: BorderRadius.circular(12.0),
                   color: const Color.fromARGB(255, 3, 199, 90),
                 ),
                 margin: const EdgeInsets.only(

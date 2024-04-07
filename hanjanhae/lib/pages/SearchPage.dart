@@ -1,13 +1,14 @@
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 
-class searchpage extends StatefulWidget {
-  const searchpage({super.key});
+class SearchPage extends StatefulWidget {
+  const SearchPage({super.key});
 
   @override
-  State<searchpage> createState() => _searchpageState();
+  State<SearchPage> createState() => _SearchPageState();
 }
 
-class _searchpageState extends State<searchpage> {
+class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,27 +17,35 @@ class _searchpageState extends State<searchpage> {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              SearchBar( // 검색 박스
-                  leading: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context); // 뒤로가기
-                    },
-                    icon: const Icon(Icons.arrow_back_ios),
+              SearchBar(
+                // 검색 박스
+                leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context); // 뒤로가기
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
                   ),
-                  trailing: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.search),
+                ),
+                trailing: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.search,
                     ),
-                  ],
-                  backgroundColor: const MaterialStatePropertyAll(Colors.white),
-                  elevation: const MaterialStatePropertyAll(2),
-                  hintText: "검색어를 입력하세요.",
+                  ),
+                ],
+                backgroundColor: const MaterialStatePropertyAll(Colors.white),
+                elevation: const MaterialStatePropertyAll(2),
+                hintText: "검색어를 입력하세요.",
               ),
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 20.0, left: 15.0),
+                    padding: const EdgeInsets.only(
+                      top: 20.0,
+                      left: 15.0,
+                    ),
                     child: Text(
                       "최근 검색어",
                       style: TextStyle(

@@ -1,14 +1,15 @@
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:hanjanhae/pages/SettingPage.dart';
 
-class mypage extends StatefulWidget {
-  const mypage({super.key});
+class MyPage extends StatefulWidget {
+  const MyPage({super.key});
 
   @override
-  State<mypage> createState() => _mypageState();
+  State<MyPage> createState() => _MyPageState();
 }
 
-class _mypageState extends State<mypage> {
+class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,11 +20,13 @@ class _mypageState extends State<mypage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const settingspage(),
+                  builder: (context) => const SettingsPage(),
                 ),
               );
             },
-            icon: const Icon(Icons.settings),
+            icon: const Icon(
+              Icons.settings,
+            ),
           ),
         ],
       ),
@@ -37,26 +40,6 @@ class _mypageState extends State<mypage> {
                   Icons.account_circle,
                   size: 100.0,
                 ),
-                // TextButton(
-                //   onPressed: () {
-                //     /*
-                //       로그인 페이지 이동 구현 위치
-                //      */
-                //   },
-                //   // style: TextButton.styleFrom(foregroundColor: Colors.black,),
-                //   child: const Row(
-                //     children: [
-                //       Text(
-                //         "로그인",
-                //         style: TextStyle(
-                //           fontSize: 30.0,
-                //           decoration: TextDecoration.underline,
-                //         ),
-                //       ),
-                //       Icon(Icons.arrow_forward_ios),
-                //     ],
-                //   ),
-                // ),
                 SizedBox(
                   width: 10.0,
                 ),
@@ -77,9 +60,6 @@ class _mypageState extends State<mypage> {
                   좋아요 목록 페이지
                  */
               },
-              // style: TextButton.styleFrom(
-              //   foregroundColor: Colors.black,
-              // ),
               child: const Row(
                 children: [
                   Text("좋아요 목록"),
@@ -87,7 +67,9 @@ class _mypageState extends State<mypage> {
                       child: Center(
                     child: null,
                   )),
-                  Icon(Icons.arrow_forward_ios),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                  ),
                 ],
               ),
             ),
@@ -97,9 +79,6 @@ class _mypageState extends State<mypage> {
                   작성한 글 페이지
                  */
               },
-              // style: TextButton.styleFrom(
-              //   foregroundColor: Colors.black,
-              // ),
               child: const Row(
                 children: [
                   Text("내가 쓴 글"),
@@ -107,7 +86,9 @@ class _mypageState extends State<mypage> {
                       child: Center(
                     child: null,
                   )),
-                  Icon(Icons.arrow_forward_ios),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                  ),
                 ],
               ),
             ),
@@ -117,9 +98,6 @@ class _mypageState extends State<mypage> {
                   시청 목록 페이지
                  */
               },
-              // style: TextButton.styleFrom(
-              //   foregroundColor: Colors.black,
-              // ),
               child: const Row(
                 children: [
                   Text("시청 목록"),
@@ -127,14 +105,17 @@ class _mypageState extends State<mypage> {
                       child: Center(
                     child: null,
                   )),
-                  Icon(Icons.arrow_forward_ios),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                  ),
                 ],
               ),
             ),
             const Expanded(
-                child: Center(
-              child: null,
-            )),
+              child: Center(
+                child: null,
+              ),
+            ),
             const Row(
               children: [
                 Text(
@@ -149,7 +130,8 @@ class _mypageState extends State<mypage> {
             ),
             const Row(
               children: [
-                Flexible( // 줄 바꿈
+                Flexible(
+                  // 줄 바꿈
                   child: Text(
                     'dataadfsdfasdfsdjhkfhjfdfffsdfsfdsfsdsdfsdkhdfhkfhdhsjgfghjgjhhjgjhgjhgjhgjhgjhggasdfsfsfsjghghjghghjghjghjgfhshjfhsdhkjfhshfhsj',
                     style: TextStyle(
@@ -161,7 +143,9 @@ class _mypageState extends State<mypage> {
               ],
             ),
             const Padding(
-              padding: EdgeInsets.only(bottom: 80.0),
+              padding: EdgeInsets.only(
+                bottom: 80.0,
+              ),
               child: Text(
                 'Version 0.0.0',
                 textAlign: TextAlign.left,

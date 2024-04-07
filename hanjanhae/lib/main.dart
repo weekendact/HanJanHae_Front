@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+// import 'package:hanjanhae/pages/LoginDetailsPage.dart';
 import 'package:hanjanhae/pages/LoginPage.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
@@ -7,13 +9,18 @@ import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
  */
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized;
-  KakaoSdk.init(nativeAppKey: '61c625d463e984405890bd99a3030f99');
-  runApp(const hanjanhae());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp, // 화면 세로 고정
+    DeviceOrientation.portraitDown,
+  ]).then((_) {
+    KakaoSdk.init(nativeAppKey: '61c625d463e984405890bd99a3030f99');
+    runApp(const Hanjanhae());
+  });
 }
 
-class hanjanhae extends StatelessWidget {
-  const hanjanhae({super.key});
+class Hanjanhae extends StatelessWidget {
+  const Hanjanhae({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,25 +40,27 @@ class hanjanhae extends StatelessWidget {
           style: ButtonStyle(
             foregroundColor: const MaterialStatePropertyAll(Colors.black),
             overlayColor: MaterialStateColor.resolveWith(
-                (states) => Colors.transparent), // 텍스트 버튼 애니메이션 제거
+              (states) => Colors.transparent,
+            ), // 텍스트 버튼 애니메이션 제거
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
             overlayColor: MaterialStateColor.resolveWith(
-                (states) => Colors.transparent), // Elevated 버튼 애니메이션 제거
+              (states) => Colors.transparent,
+            ), // Elevated 버튼 애니메이션 제거
           ),
         ),
         iconButtonTheme: IconButtonThemeData(
           style: ButtonStyle(
               overlayColor: MaterialStateColor.resolveWith(
-                  (states) => Colors.transparent) // 아이콘 버튼 애니메이션 제거
+            (states) => Colors.transparent,
+          ) // 아이콘 버튼 애니메이션 제거
               ),
         ),
       ),
-      home: const loginpage(),
+      home: const LoginPage(),
+      // home: const logindetailpage(),
     );
   }
 }
-
-

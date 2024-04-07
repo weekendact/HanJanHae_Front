@@ -1,33 +1,31 @@
+// ignore_for_file: file_names
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 void sendDataToDatabase(String id, String email, String apiUrl) async {
   // 유저 정보 데이터베이스 전송 함수
-  Map<String, String> Body = {
+  Map<String, String> body = {
     'usersSocialId': id,
     'usersEmail': email,
   };
-  String jsonBody = json.encode(Body); // json 형식으로 변환
+  String jsonBody = json.encode(body); // json 형식으로 변환
 
   try {
-    final response = await http.post(Uri.parse(apiUrl),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonBody);
-
-    if (response.statusCode == 200) {
-      // 성공적으로 데이터를 전송하였을 때의 처리
-      print('Response body: ${response.body.toString()}');
-
-      // 'content-type' 헤더 값 추출
-      String contentType = response.headers['content-type'] ?? 'Unknown';
-      print('Content-Type: $contentType');
-
-      // 'X-Custom-Header' 헤더 값 추출
-      String customHeaderValue =
-          response.headers['x-custom-header'] ?? 'Not Provided';
-      print('X-Custom-Header: $customHeaderValue');
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonBody,
+    );
+    // 201 신규 사용자
+    // 200 기존 사용자
+    if (response.statusCode == 201) {
+      // 신규 사용자
+      print('Response body: ${response.body}');
+    } else if (response.statusCode == 200) {
+      // 기존 사용자
+      print("Response body: ${response.body}");
     } else {
       // 서버 에러 처리
       print('Request failed with status: ${response.statusCode}.');
@@ -38,7 +36,8 @@ void sendDataToDatabase(String id, String email, String apiUrl) async {
   }
 }
 
-void sendTokenToDatabase(String token, String apiUrl) async { // 헤더에 보내는 형식으로 변경**
+void sendTokenToDatabase(String token, String apiUrl) async {
+  // 헤더에 보내는 형식으로 변경**
   // Token 데이터베이스 전송
   Map<String, dynamic> tokenValue = {
     'token': token,
@@ -46,11 +45,13 @@ void sendTokenToDatabase(String token, String apiUrl) async { // 헤더에 보�
   String jsontoken = json.encode(tokenValue);
 
   try {
-    final response = await http.post(Uri.parse(apiUrl),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsontoken);
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsontoken,
+    );
     if (response.statusCode == 200) {
       print('send');
     } else {

@@ -1,13 +1,14 @@
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 
-class aichatpage extends StatefulWidget {
-  const aichatpage({super.key});
+class AIChaPpage extends StatefulWidget {
+  const AIChaPpage({super.key});
 
   @override
-  State<aichatpage> createState() => _aichatpageState();
+  State<AIChaPpage> createState() => _AIChaPpageState();
 }
 
-class _aichatpageState extends State<aichatpage> {
+class _AIChaPpageState extends State<AIChaPpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +17,9 @@ class _aichatpageState extends State<aichatpage> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(Icons.arrow_back_ios),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+          ),
         ),
       ),
       body: SafeArea(

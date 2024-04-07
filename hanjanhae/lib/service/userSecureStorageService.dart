@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorageService {
@@ -25,6 +26,10 @@ class SecureStorageService {
 
   Future<void> removeToken() async { // JWT 토큰 값 삭제 
     await userStorage.delete(key: 'JWTToken');
+  }
+
+  Future<void> removeData(String dataKey) async { // 키 값으로 데이터 삭제 
+    await userStorage.delete(key: dataKey);
   }
 
   Future<void> removeAll() async { // 전체 삭제

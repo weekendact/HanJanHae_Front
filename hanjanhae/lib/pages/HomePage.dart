@@ -1,3 +1,4 @@
+// ignore_for_file: unnecessary_import, file_names
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,21 +7,21 @@ import 'package:flutter/widgets.dart';
 import 'package:hanjanhae/pages/AIChatPage.dart';
 import 'package:hanjanhae/pages/SearchPage.dart';
 
-class homepage extends StatefulWidget {
-  const homepage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<homepage> createState() => _homepageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _homepageState extends State<homepage> {
+class _HomePageState extends State<HomePage> {
   int current = 0;
   Color iconColor = Colors.grey;
   int likes1 = 0; //좋아요버튼 1
   int likes2 = 0; //좋아요버튼 2
   int likes3 = 0; //좋아요버튼 3
   int likes4 = 0; //좋아요버튼 4
-  int likes5 = 0; //좋아요버튼 4
+  int likes5 = 0; //좋아요버튼 5
   Color iconColor1 = Colors.grey; //좋아요버튼 초기값 색1
   Color iconColor2 = Colors.grey; //좋아요버튼 초기값 색2
   Color iconColor3 = Colors.grey; //좋아요버튼 초기값 색3
@@ -70,17 +71,19 @@ class _homepageState extends State<homepage> {
                           ),
                         ),
                         const Expanded(
-                            child: Center(
-                          child: null,
-                        )),
+                          child: Center(
+                            child: null,
+                          ),
+                        ),
                         IconButton(
                           // 검색 페이지 이동
                           onPressed: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const searchpage(),
-                                ));
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SearchPage(),
+                              ),
+                            );
                           },
                           icon: const Icon(Icons.search),
                         ),
@@ -118,16 +121,22 @@ class _homepageState extends State<homepage> {
                             fontSize: 25,
                           ),
                         ),
-                        Expanded(child: Container(height: 1, color: Colors.grey, margin: const EdgeInsets.all(15.0),)),
+                        Expanded(
+                            child: Container(
+                          height: 1,
+                          color: Colors.grey,
+                          margin: const EdgeInsets.all(15.0),
+                        )),
                       ],
                     ),
                     SizedBox(
-                        // color: Colors.grey,
-                        height: 170.0,
-                        width: MediaQuery.of(context).size.width,
-                        child: cocktailcard1()),
+                      // color: Colors.grey,
+                      height: 170.0,
+                      width: MediaQuery.of(context).size.width,
+                      child: cocktailcard1(),
+                    ),
 
-                        const SizedBox(
+                    const SizedBox(
                       height: 30.0,
                     ),
                     const Row(
@@ -148,14 +157,21 @@ class _homepageState extends State<homepage> {
                             fontSize: 25,
                           ),
                         ),
-                        Expanded(child: Container(height: 1, color: Colors.black,margin: const EdgeInsets.all(15.0),)),
+                        Expanded(
+                          child: Container(
+                            height: 1,
+                            color: Colors.black,
+                            margin: const EdgeInsets.all(15.0),
+                          ),
+                        ),
                       ],
                     ),
                     SizedBox(
-                        // color: Colors.grey,
-                        height: 170.0,
-                        width: MediaQuery.of(context).size.width,
-                        child: cocktailcard2()),
+                      // color: Colors.grey,
+                      height: 170.0,
+                      width: MediaQuery.of(context).size.width,
+                      child: cocktailcard2(),
+                    ),
                     ///////////////////////////////////cdh//////////////////////////////
                     const SizedBox(
                       height: 50.0,
@@ -195,7 +211,7 @@ class _homepageState extends State<homepage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const aichatpage(),
+                            builder: (context) => const AIChaPpage(),
                           ),
                         );
                       },
@@ -217,29 +233,33 @@ class _homepageState extends State<homepage> {
                       children: [
                         const Text(
                           "커뮤니티",
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
                         ),
                         const Expanded(
-                            child: Center(
-                          child: null,
-                        )),
+                          child: Center(
+                            child: null,
+                          ),
+                        ),
                         TextButton(
-                            onPressed: () {},
-                            child: const Row(
-                              children: [
-                                Text(
-                                  "더보기",
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 10,
-                                  ),
+                          onPressed: () {},
+                          child: const Row(
+                            children: [
+                              Text(
+                                "더보기",
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 10,
                                 ),
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 10,
-                                ),
-                              ],
-                            )),
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                size: 10,
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -261,24 +281,26 @@ class _homepageState extends State<homepage> {
           String imgLink = entry.value;
           return Builder(
             builder: (context) {
-              return Stack(children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Image(
-                      fit: BoxFit.cover,
-                      image: AssetImage(imgLink),
-                      height: 300,
+              return Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Image(
+                        fit: BoxFit.cover,
+                        image: AssetImage(imgLink),
+                        height: 300,
+                      ),
                     ),
                   ),
-                ),
-                Positioned(
-                  top: 170,
-                  left: 53,
-                  child: hotcocktailname(index),
-                )
-              ]);
+                  Positioned(
+                    top: 170,
+                    left: 53,
+                    child: hotcocktailname(index),
+                  )
+                ],
+              );
             },
           );
         },
@@ -319,40 +341,45 @@ class _homepageState extends State<homepage> {
     }
 
     return Center(
-      child: Stack(children: [
-        SizedBox(
-          width: 200,
-          height: 60,
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.white.withOpacity(0.80),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
+      child: Stack(
+        children: [
+          SizedBox(
+            width: 200,
+            height: 60,
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white.withOpacity(0.80),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+              ),
+              child: Row(
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        cocktailName,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-            child: Row(
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      cocktailName,
-                      style: const TextStyle(fontSize: 16, color: Colors.black),
-                    ),
-                  ],
-                ),
-              ],
-            ),
           ),
-        ),
-        Positioned(
-          top: 15,
-          right: 20,
-          child: goodbuttonlist(index),
-        ),
-      ]),
+          Positioned(
+            top: 15,
+            right: 20,
+            child: goodbuttonlist(index),
+          ),
+        ],
+      ),
     );
   }
 
@@ -447,7 +474,9 @@ class _homepageState extends State<homepage> {
             ),
             Text(
               '$likes2',
-              style: const TextStyle(fontSize: 11),
+              style: const TextStyle(
+                fontSize: 11,
+              ),
             ),
           ],
         ),
@@ -488,7 +517,9 @@ class _homepageState extends State<homepage> {
             ),
             Text(
               '$likes3',
-              style: const TextStyle(fontSize: 11),
+              style: const TextStyle(
+                fontSize: 11,
+              ),
             ),
           ],
         ),
@@ -529,7 +560,9 @@ class _homepageState extends State<homepage> {
             ),
             Text(
               '$likes4',
-              style: const TextStyle(fontSize: 11),
+              style: const TextStyle(
+                fontSize: 11,
+              ),
             ),
           ],
         ),
@@ -570,7 +603,9 @@ class _homepageState extends State<homepage> {
             ),
             Text(
               '$likes5',
-              style: const TextStyle(fontSize: 11),
+              style: const TextStyle(
+                fontSize: 11,
+              ),
             ),
           ],
         ),
@@ -623,7 +658,9 @@ class _homepageState extends State<homepage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 4),
+                      const SizedBox(
+                        height: 4,
+                      ),
                       Text(
                         cocktailName,
                         style: const TextStyle(

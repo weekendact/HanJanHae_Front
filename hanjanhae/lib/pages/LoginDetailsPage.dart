@@ -1,18 +1,19 @@
+// ignore_for_file: unnecessary_import, file_names
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hanjanhae/DatabaseUrlAddresses.dart';
 import 'package:hanjanhae/service/LoginDuplicateCheckService.dart';
-import 'package:hanjanhae/service/DatabaseUrlAddresses.dart';
 
-class logindetailpage extends StatefulWidget {
-  const logindetailpage({super.key});
+class LoginDetailPage extends StatefulWidget {
+  const LoginDetailPage({super.key});
 
   @override
-  State<logindetailpage> createState() => _logindetailpageState();
+  State<LoginDetailPage> createState() => _LoginDetailPageState();
 }
 
-class _logindetailpageState extends State<logindetailpage> {
+class _LoginDetailPageState extends State<LoginDetailPage> {
   int? selectedChoiceGender;
 
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
@@ -26,6 +27,10 @@ class _logindetailpageState extends State<logindetailpage> {
     super.dispose();
   }
 
+  String? nicknameErrorText; // 닉네임 에러 텍스트
+  String? genderErrorText; // 성별 에러 텍스트
+  String? ageErrorText; // 나이 에러 텍스트
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +43,10 @@ class _logindetailpageState extends State<logindetailpage> {
         ),
         title: const Text(
           "회원가입",
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         centerTitle: true,
       ),
@@ -46,14 +54,16 @@ class _logindetailpageState extends State<logindetailpage> {
         child: Form(
           key: formkey,
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(30.0),
             child: Column(
               children: [
                 Container(
                   margin: const EdgeInsets.fromLTRB(0, 30, 0, 5),
                   child: const Text(
                     "뭐라고 부를까요?",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 Row(
@@ -71,6 +81,8 @@ class _logindetailpageState extends State<logindetailpage> {
                           textAlignVertical: TextAlignVertical.bottom,
                           decoration: InputDecoration(
                             hintText: "닉네임",
+                            // errorText: nicknameErrorText ?? "",
+                            // errorStyle: ,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -80,22 +92,26 @@ class _logindetailpageState extends State<logindetailpage> {
                     ),
                     Container(
                       margin: const EdgeInsets.all(10),
-                      width: 120.0,
+                      width: 110.0,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            minimumSize: const Size(50, 50)),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          minimumSize: const Size(50, 50),
+                        ),
                         onPressed: () {
                           // 엔드포인트 /nicknameDuplicate , 파라미터 값 전달 후 처리
-                          var nickname = nicknameController.text;
-                          nicknameDuplicate(nickname, nicknameDuplicateUrl);
+                          final String nickname = nicknameController.text;
+                          print(nickname);
+                          print(nicknameDuplicate(
+                              nickname, nicknameDuplicateUrl));
                         },
                         child: const Text(
                           "중복확인",
                           style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.black,
+                            fontSize: 14.0,
+                            color: Colors.black,
                           ),
                         ),
                       ),
@@ -106,7 +122,9 @@ class _logindetailpageState extends State<logindetailpage> {
                   margin: const EdgeInsets.fromLTRB(0, 30, 0, 5),
                   child: const Text(
                     "성별을 알려주세요!",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 Center(
@@ -116,7 +134,9 @@ class _logindetailpageState extends State<logindetailpage> {
                   margin: const EdgeInsets.fromLTRB(0, 30, 0, 5),
                   child: const Text(
                     "나이를 알려주세요!",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -144,17 +164,20 @@ class _logindetailpageState extends State<logindetailpage> {
                   ),
                 ),
                 const Expanded(
-                    child: Center(
-                  child: null,
-                )),
+                  child: Center(
+                    child: null,
+                  ),
+                ),
                 Container(
                   margin: const EdgeInsets.all(10),
                   width: MediaQuery.of(context).size.width,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        minimumSize: const Size(50, 50)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      minimumSize: const Size(50, 50),
+                    ),
                     onPressed: () {
                       print(nicknameController.text);
                       print('$selectedChoiceGender');
@@ -169,9 +192,10 @@ class _logindetailpageState extends State<logindetailpage> {
                     child: const Text(
                       "회원가입",
                       style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 )
@@ -194,7 +218,10 @@ class _logindetailpageState extends State<logindetailpage> {
         ChoiceChip(
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           label: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 50, vertical: 3),
+            padding: EdgeInsets.symmetric(
+              horizontal: 43,
+              vertical: 3,
+            ),
             child: Text(
               "남자",
               style: TextStyle(
@@ -212,7 +239,10 @@ class _logindetailpageState extends State<logindetailpage> {
         ChoiceChip(
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           label: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 50, vertical: 3),
+            padding: EdgeInsets.symmetric(
+              horizontal: 43,
+              vertical: 3,
+            ),
             child: Text(
               "여자",
               style: TextStyle(

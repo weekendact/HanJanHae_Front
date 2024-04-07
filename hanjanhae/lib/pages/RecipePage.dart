@@ -1,19 +1,22 @@
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 
-class recipepage extends StatefulWidget {
-  const recipepage({super.key});
+class RecipePage extends StatefulWidget {
+  const RecipePage({super.key});
 
   @override
-  State<recipepage> createState() => _recipepageState();
+  State<RecipePage> createState() => _RecipePageState();
 }
 
-class _recipepageState extends State<recipepage> {
+class _RecipePageState extends State<RecipePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Recipe'),
+        title: const Text(
+          'Recipe',
+        ),
       ),
     );
   }
