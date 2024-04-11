@@ -14,11 +14,13 @@ class LoginDetailPage extends StatefulWidget {
 }
 
 class _LoginDetailPageState extends State<LoginDetailPage> {
-  int? selectedChoiceGender;
+  String? selectedChoiceGender;
 
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   TextEditingController nicknameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
+
+  int age = 0;
 
   @override
   void dispose() {
@@ -105,7 +107,7 @@ class _LoginDetailPageState extends State<LoginDetailPage> {
                           final String nickname = nicknameController.text;
                           print(nickname);
                           print(nicknameDuplicate(
-                              nickname, nicknameDuplicateUrl));
+                              nickname, Endpoints.nicknameDuplicateUrl));
                         },
                         child: const Text(
                           "중복확인",
@@ -160,7 +162,8 @@ class _LoginDetailPageState extends State<LoginDetailPage> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                    },
                   ),
                 ),
                 const Expanded(
@@ -179,9 +182,11 @@ class _LoginDetailPageState extends State<LoginDetailPage> {
                       minimumSize: const Size(50, 50),
                     ),
                     onPressed: () {
+                      age = int.parse(ageController.text);
+
                       print(nicknameController.text);
+                      print(age);
                       print('$selectedChoiceGender');
-                      print(ageController.text);
                       /*
           
                         null 값일 경우 오류 메시지 생성
@@ -229,10 +234,10 @@ class _LoginDetailPageState extends State<LoginDetailPage> {
               ),
             ),
           ),
-          selected: selectedChoiceGender == 1,
+          selected: selectedChoiceGender == "M",
           onSelected: (selected) {
             setState(() {
-              selectedChoiceGender = selected ? 1 : null;
+              selectedChoiceGender = selected ? "M" : null;
             });
           },
         ),
@@ -250,10 +255,10 @@ class _LoginDetailPageState extends State<LoginDetailPage> {
               ),
             ),
           ),
-          selected: selectedChoiceGender == 2,
+          selected: selectedChoiceGender == "F",
           onSelected: (selected) {
             setState(() {
-              selectedChoiceGender = selected ? 2 : null;
+              selectedChoiceGender = selected ? "F" : null;
             });
           },
         ),

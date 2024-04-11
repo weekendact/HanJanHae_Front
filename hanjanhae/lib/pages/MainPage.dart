@@ -5,14 +5,14 @@ import 'package:hanjanhae/pages/MyPage.dart';
 import 'package:hanjanhae/pages/PostingPage.dart';
 import 'package:hanjanhae/pages/RecipePage.dart';
 
-class MainpPage extends StatefulWidget {
-  const MainpPage({super.key});
+class MainPage extends StatefulWidget {
+  const MainPage({super.key});
 
   @override
-  State<MainpPage> createState() => _MainpPageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _MainpPageState extends State<MainpPage> {
+class _MainPageState extends State<MainPage> {
   List<Widget> pages = [
     // 바텀 버튼 페이지 리스트
     const HomePage(key: ValueKey("homepage")),

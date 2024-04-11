@@ -20,6 +20,8 @@ dependencies:
   flutter_bloc: ^8.1.5 # 상태 관리 패키지
   flutter_secure_storage: ^9.0.0 # 데이터 암호화 데이터베이스 패키지
   flutter_screenutil: ^5.9.0 # 화면 고정 패키지
+  shimmer: ^3.0.0 # 로딩 화면
+  pull_to_refresh: ^2.0.0 # 새로고침
 
 dev_dependencies:
   flutter_test:

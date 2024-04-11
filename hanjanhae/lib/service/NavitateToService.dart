@@ -7,7 +7,7 @@ void navigateToHomePage(BuildContext context) async {
   // 홈페이지 이동 함수
   Navigator.of(context).pushReplacement(
     MaterialPageRoute(
-      builder: (context) => const MainpPage(),
+      builder: (context) => const MainPage(),
     ),
   );
 }

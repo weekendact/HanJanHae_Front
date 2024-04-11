@@ -22,5 +22,5 @@ void signInWithGoogle(BuildContext context) async {
   String googleId = googleUser.id;
   var googleEmail = googleUser.email;
 
-  sendDataToDatabase(googleId, googleEmail, loginApiUrl); // 데이터베이스 전송
+  sendDataToDatabase(googleId, googleEmail, Endpoints.signUpUrl); // 데이터베이스 전송
 }

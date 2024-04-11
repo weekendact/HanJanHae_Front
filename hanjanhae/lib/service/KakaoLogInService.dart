@@ -33,7 +33,7 @@ void signInWithKakao(BuildContext context) async {
       kakaoEmail = kakaoUser['kakao_account']['email'];
     }
 
-    sendDataToDatabase(kakaoId, kakaoEmail, loginApiUrl); // 데이터베이스 전송
+    sendDataToDatabase(kakaoId, kakaoEmail, Endpoints.signUpUrl); // 데이터베이스 전송
   } catch (error) {
     print('카카오톡으로 로그인 실패 $error');
   }

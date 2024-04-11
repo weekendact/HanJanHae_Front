@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 import 'dart:convert';
+import 'package:hanjanhae/DatabaseUrlAddresses.dart';
 import 'package:http/http.dart' as http;
 
 void sendDataToDatabase(String id, String email, String apiUrl) async {
@@ -12,7 +13,7 @@ void sendDataToDatabase(String id, String email, String apiUrl) async {
 
   try {
     final response = await http.post(
-      Uri.parse(apiUrl),
+      Uri.parse("${ApiConstants.baseUrl}$apiUrl"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

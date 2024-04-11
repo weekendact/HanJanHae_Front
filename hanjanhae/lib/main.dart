@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:hanjanhae/pages/LoginDetailsPage.dart';
+import 'package:hanjanhae/pages/LoginDetailsPage.dart';
 import 'package:hanjanhae/pages/LoginPage.dart';
+import 'package:hanjanhae/pages/MainPage.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
 /*
@@ -59,8 +60,9 @@ class Hanjanhae extends StatelessWidget {
               ),
         ),
       ),
-      home: const LoginPage(),
-      // home: const logindetailpage(),
+      // home: const LoginPage(),
+      home: const LoginDetailPage(),
+      // home: const MainPage(),
     );
   }
 }
