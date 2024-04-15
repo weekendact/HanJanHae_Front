@@ -90,6 +90,18 @@
        <true/>
        <key>NSExceptionDomains</key>
        <dict>
+       <key>example.com</key>
+        <dict>
+            <!-- HTTP 통신 허용 -->
+            <key>NSExceptionAllowsInsecureHTTPLoads</key>
+            <true/>
+            <!-- 최소 TLS 버전 설정 (옵션) -->
+            <key>NSExceptionMinimumTLSVersion</key>
+            <string>TLSv1.2</string>
+            <!-- NSIncludesSubdomains 설정 (옵션) -->
+            <key>NSIncludesSubdomains</key>
+            <true/>
+        </dict>
           <key>naver.com</key>
           <dict>
              <key>NSExceptionRequiresForwardSecrecy</key>

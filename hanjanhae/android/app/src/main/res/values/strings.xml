@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<!-- 카카오 로그인 -->
+    <string name="kakao_app_key">61c625d463e984405890bd99a3030f99</string>
 <!-- 네이버 로그인 -->
     <string name="client_id">hDF_A1AnQHW1NH280dD0</string>
     <string name="client_secret">_PtzfDR9iO</string>

@@ -11,6 +11,7 @@ import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp, // 화면 세로 고정
     DeviceOrientation.portraitDown,
@@ -26,7 +27,7 @@ class Hanjanhae extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      locale: const Locale('kr', "KR"),
+      locale: const Locale('kr', 'KR'),
       title: 'hanjanhae Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -60,8 +61,8 @@ class Hanjanhae extends StatelessWidget {
               ),
         ),
       ),
-      // home: const LoginPage(),
-      home: const LoginDetailPage(),
+      home: const LoginPage(),
+      // home: const LoginDetailPage(),
       // home: const MainPage(),
     );
   }
