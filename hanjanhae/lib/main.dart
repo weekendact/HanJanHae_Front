@@ -5,6 +5,7 @@ import 'package:hanjanhae/pages/LoginPage.dart';
 import 'package:hanjanhae/pages/MainPage.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
+
 /*
   내부 데베에서 토큰이 있는지 없는지 확인 후 있으면 로그인 후 메인페이지, 없으면 LoginDetail 페이지
  */
@@ -61,9 +62,9 @@ class Hanjanhae extends StatelessWidget {
               ),
         ),
       ),
-      home: const LoginPage(),
+      // home: const LoginPage(),
       // home: const LoginDetailPage(),
-      // home: const MainPage(),
+      home: const MainPage(),
     );
   }
 }

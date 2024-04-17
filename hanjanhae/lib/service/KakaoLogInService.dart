@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, prefer_typing_uninitialized_variables
+// ignore_for_file: file_names, prefer_typing_uninitialized_variables, avoid_print
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';

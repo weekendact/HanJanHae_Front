@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, unnecessary_string_interpolations, avoid_print, unnecessary_brace_in_string_interps
 import 'dart:convert';
 import 'package:hanjanhae/DatabaseUrlAddresses.dart';
 import 'package:http/http.dart' as http;
@@ -37,28 +37,29 @@ void sendDataToDatabase(String id, String email, String apiUrl) async {
   }
 }
 
-void sendTokenToDatabase(String token, String apiUrl) async {
+Future<bool> sendTokenToDatabase(String? token, String apiUrl) async {
   // 헤더에 보내는 형식으로 변경**
   // Token 데이터베이스 전송
-  Map<String, dynamic> tokenValue = {
-    'token': token,
-  };
-  String jsontoken = json.encode(tokenValue);
+  // String jsontoken = json.encode(token);
 
   try {
     final response = await http.post(
-      Uri.parse(apiUrl),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsontoken,
+      Uri.parse("${ApiConstants.baseUrl}$apiUrl"),
+      headers: {'Authorization': 'Bearer ${token}'},
+      // headers: <String, String>{
+      //   'Content-Type': 'application/json; charset=UTF-8',
+      //   'Authorization': '$jsontoken',
+      // },
     );
     if (response.statusCode == 200) {
       print('send');
+      return true;
     } else {
       print('error ${response.statusCode}');
+      return false;
     }
   } catch (error) {
     print('send error : $error');
+    return false;
   }
 }
