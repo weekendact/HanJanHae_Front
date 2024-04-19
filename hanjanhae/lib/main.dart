@@ -62,9 +62,9 @@ class Hanjanhae extends StatelessWidget {
               ),
         ),
       ),
-      // home: const LoginPage(),
+      home: const LoginPage(),
       // home: const LoginDetailPage(),
-      home: const MainPage(),
+      // home: const MainPage(),
     );
   }
 }

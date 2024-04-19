@@ -9,7 +9,7 @@ class SecureStorageService {
   }
 
   Future<void> saveToken(String? token) async { // JWT 토큰 저장
-    await userStorage.write(key: 'JWTToken', value: token);
+    await userStorage.write(key: 'Authorization', value: token);
   }
 
   Future<void> saveData(String dataKey, dynamic data) async { // data 저장
@@ -17,7 +17,7 @@ class SecureStorageService {
   }
 
   Future<String?> selectToken() async { // JWT 토큰 값 찾기
-    return await userStorage.read(key: 'JWTToken');
+    return await userStorage.read(key: 'Authorization');
   }
 
   Future<String?> selectData(String selectKey) async { // 키 값으로 데이터 찾기
@@ -25,7 +25,7 @@ class SecureStorageService {
   }
 
   Future<void> removeToken() async { // JWT 토큰 값 삭제 
-    await userStorage.delete(key: 'JWTToken');
+    await userStorage.delete(key: 'Authorization');
   }
 
   Future<void> removeData(String dataKey) async { // 키 값으로 데이터 삭제 
