@@ -1,5 +1,7 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, unnecessary_null_comparison
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -28,6 +30,12 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                 ),
                 trailing: [
+                  IconButton(
+                    onPressed: () {
+                      
+                    },
+                    icon: const Icon(Icons.clear),
+                  ),
                   IconButton(
                     onPressed: () {},
                     icon: const Icon(
