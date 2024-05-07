@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
 import 'package:hanjanhae/DatabaseUrlAddresses.dart';
-import 'package:hanjanhae/pages/LoginPage.dart';
 import 'package:hanjanhae/service/SendLoginDataToDatabaseService.dart';
+import 'package:hanjanhae/service/Variable.dart';
 
 void signInWithNaver(BuildContext context) async {
   // 네이버 로그인

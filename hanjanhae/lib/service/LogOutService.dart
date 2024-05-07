@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:hanjanhae/pages/LoginPage.dart';
 import 'package:hanjanhae/service/NavitateToService.dart';
+import 'package:hanjanhae/service/Variable.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
 void signOut(BuildContext context) async {

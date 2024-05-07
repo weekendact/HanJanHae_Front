@@ -1,9 +1,6 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
-import 'package:hanjanhae/pages/HomePage.dart';
-import 'package:hanjanhae/pages/MyPage.dart';
-import 'package:hanjanhae/pages/PostingPage.dart';
-import 'package:hanjanhae/pages/RecipePage.dart';
+import 'package:hanjanhae/service/Variable.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -13,16 +10,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  List<Widget> pages = [
-    // 바텀 버튼 페이지 리스트
-    const HomePage(key: ValueKey("homepage")),
-    const RecipePage(key: ValueKey("recipepage")),
-    const PostingPage(key: ValueKey("postingpage")),
-    const MyPage(key: ValueKey("mypage")),
-  ];
-
-  int currentIndex = 0;
-
   void onTap(int index) {
     setState(() {
       currentIndex = index;

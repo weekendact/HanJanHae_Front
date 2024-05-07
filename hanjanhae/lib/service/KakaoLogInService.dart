@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hanjanhae/DatabaseUrlAddresses.dart';
+import 'package:hanjanhae/service/Variable.dart';
 import 'package:hanjanhae/service/userSecureStorageService.dart';
 import 'package:http/http.dart' as http;
-import 'package:hanjanhae/pages/LoginPage.dart';
 import 'package:hanjanhae/service/SendLoginDataToDatabaseService.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 

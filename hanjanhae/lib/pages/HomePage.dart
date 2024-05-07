@@ -1,11 +1,11 @@
 // ignore_for_file: unnecessary_import, file_names
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hanjanhae/pages/AIChatPage.dart';
 import 'package:hanjanhae/pages/SearchPage.dart';
+import 'package:hanjanhae/service/Variable.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,26 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int current = 0;
-  Color iconColor = Colors.grey;
-  int likes1 = 0; //좋아요버튼 1
-  int likes2 = 0; //좋아요버튼 2
-  int likes3 = 0; //좋아요버튼 3
-  int likes4 = 0; //좋아요버튼 4
-  int likes5 = 0; //좋아요버튼 5
-  Color iconColor1 = Colors.grey; //좋아요버튼 초기값 색1
-  Color iconColor2 = Colors.grey; //좋아요버튼 초기값 색2
-  Color iconColor3 = Colors.grey; //좋아요버튼 초기값 색3
-  Color iconColor4 = Colors.grey; //좋아요버튼 초기값 색4
-  Color iconColor5 = Colors.grey; //좋아요버튼 초기값 색5
   final CarouselController _controller = CarouselController();
-  List imageList = [
-    "assets/cocktail.jpeg",
-    "assets/cocktail1.jpg",
-    "assets/cocktail2.jpg",
-    "assets/cocktail3.jpg",
-    "assets/cocktail.jpeg",
-  ];
 
   @override
   Widget build(BuildContext context) {

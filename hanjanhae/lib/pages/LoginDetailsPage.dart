@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hanjanhae/DatabaseUrlAddresses.dart';
 import 'package:hanjanhae/service/LoginDuplicateCheckService.dart';
+import 'package:hanjanhae/service/Variable.dart';
 
 class LoginDetailPage extends StatefulWidget {
   const LoginDetailPage({super.key});
@@ -14,13 +15,6 @@ class LoginDetailPage extends StatefulWidget {
 }
 
 class _LoginDetailPageState extends State<LoginDetailPage> {
-  String? selectedChoiceGender;
-
-  GlobalKey<FormState> formkey = GlobalKey<FormState>();
-  TextEditingController nicknameController = TextEditingController();
-  TextEditingController ageController = TextEditingController();
-
-  int age = 0;
 
   @override
   void dispose() {
@@ -28,10 +22,6 @@ class _LoginDetailPageState extends State<LoginDetailPage> {
     ageController.dispose();
     super.dispose();
   }
-
-  String? nicknameErrorText; // 닉네임 에러 텍스트
-  String? genderErrorText; // 성별 에러 텍스트
-  String? ageErrorText; // 나이 에러 텍스트
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +44,7 @@ class _LoginDetailPageState extends State<LoginDetailPage> {
       ),
       body: SafeArea(
         child: Form(
-          key: formkey,
+          key: logInDetailFormkey,
           child: Padding(
             padding: const EdgeInsets.all(30.0),
             child: Column(
@@ -182,10 +172,10 @@ class _LoginDetailPageState extends State<LoginDetailPage> {
                       minimumSize: const Size(50, 50),
                     ),
                     onPressed: () {
-                      age = int.parse(ageController.text);
+                      logInDetailAge = int.parse(ageController.text);
 
                       print(nicknameController.text);
-                      print(age);
+                      print(logInDetailAge);
                       print('$selectedChoiceGender');
                       /*
           
@@ -211,10 +201,6 @@ class _LoginDetailPageState extends State<LoginDetailPage> {
       ),
     );
   }
-
-  // void submit() {
-  //   if
-  // }
 
   Widget genterch() {
     return Wrap(

@@ -4,15 +4,7 @@ import 'package:hanjanhae/service/GoogleLogInService.dart';
 import 'package:hanjanhae/service/KakaoLogInService.dart';
 import 'package:hanjanhae/service/NaverLogInService.dart';
 import 'package:hanjanhae/service/NavitateToService.dart';
-
-enum LoginPlatform {
-  kakao,
-  google,
-  naver,
-  none,
-}
-
-LoginPlatform loginPlatform = LoginPlatform.none;
+import 'package:hanjanhae/service/Variable.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
