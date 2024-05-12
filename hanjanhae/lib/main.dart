@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hanjanhae/pages/LoginDetailsPage.dart';
-import 'package:hanjanhae/pages/LoginPage.dart';
 import 'package:hanjanhae/pages/MainPage.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
@@ -22,9 +20,14 @@ void main() {
   });
 }
 
-class Hanjanhae extends StatelessWidget {
+class Hanjanhae extends StatefulWidget {
   const Hanjanhae({super.key});
 
+  @override
+  State<Hanjanhae> createState() => _HanjanhaeState();
+}
+
+class _HanjanhaeState extends State<Hanjanhae> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -62,8 +65,6 @@ class Hanjanhae extends StatelessWidget {
               ),
         ),
       ),
-      // home: const LoginPage(),
-      // home: const LoginDetailPage(),
       home: const MainPage(),
     );
   }
