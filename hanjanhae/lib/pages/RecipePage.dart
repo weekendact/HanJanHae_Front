@@ -87,13 +87,12 @@ class _recipepageState extends State<recipepage> {
       left: left,
       child: GestureDetector(
         onTap: () {
-          // 해당 박스의 인덱스에 따라 네비게이션 트리거
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    DetailPage(boxIndex: (bottom == 315) ? 0 : 1)),
-          );
+          setState(() {
+            // 선택된 카드가 없으면 선택 처리
+            if (_selectedIndex == -1) {
+              _selectedIndex = (bottom == 315) ? 0 : 1;
+            }
+          });
         },
         child: Container(
           width: 110,
@@ -192,24 +191,6 @@ class _recipepageState extends State<recipepage> {
             SizedBox(height: 5),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class DetailPage extends StatelessWidget {
-  final int boxIndex;
-
-  const DetailPage({Key? key, required this.boxIndex}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Detail Page - Box $boxIndex'),
-      ),
-      body: Center(
-        child: Text('Detail Page - Box $boxIndex'),
       ),
     );
   }

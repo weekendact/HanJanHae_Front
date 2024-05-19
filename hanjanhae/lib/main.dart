@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hanjanhae/pages/RecipePage.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp, // 화면 세로 고정
     DeviceOrientation.portraitDown,
@@ -59,7 +60,7 @@ class _HanjanhaeState extends State<Hanjanhae> {
               ),
         ),
       ),
-      // home: (시작 페이지),
+      home: recipepage(),
     );
   }
 }
