@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class recipepage extends StatefulWidget {
-  const recipepage({Key? key});
+  const recipepage({Key? key}) : super(key: key);
 
   @override
-  State<recipepage> createState() => _recipepageState();
+  State<recipepage> createState() => _RecipePageState();
 }
 
-class _recipepageState extends State<recipepage> {
+class _RecipePageState extends State<recipepage> {
   int _selectedIndex = -1; // 선택된 카드의 인덱스를 저장하는 변수
 
   @override
@@ -15,12 +15,12 @@ class _recipepageState extends State<recipepage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        //title: const Text('Recipe'),
+        // title: const Text('Recipe'),
       ),
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -33,6 +33,7 @@ class _recipepageState extends State<recipepage> {
             ),
           ),
           Positioned(
+            top: 0,
             child: SizedBox(
               height: 150.0,
               width: MediaQuery.of(context).size.width,
@@ -42,39 +43,39 @@ class _recipepageState extends State<recipepage> {
                   _buildAlcoholTypeCard(
                       context, 'assets/alcohol_icon/tequila.png', "데킬라", 0),
                   _buildAlcoholTypeCard(
-                      context, 'assets/cocktail1.jpg', "칵테일2", 1),
+                      context, 'assets/req/cocktail1.jpg', "칵테일2", 1),
                   _buildAlcoholTypeCard(
-                      context, 'assets/cocktail1.jpg', "칵테일3", 2),
+                      context, 'assets/req/cocktail1.jpg', "칵테일3", 2),
                   _buildAlcoholTypeCard(
-                      context, 'assets/cocktail1.jpg', "칵테일4", 3),
+                      context, 'assets/req/cocktail1.jpg', "칵테일4", 3),
                   _buildAlcoholTypeCard(
-                      context, 'assets/cocktail1.jpg', "칵테일5", 5),
+                      context, 'assets/req/cocktail1.jpg', "칵테일5", 5),
                   _buildAlcoholTypeCard(
-                      context, 'assets/cocktail1.jpg', "칵테일6", 6),
+                      context, 'assets/req/cocktail1.jpg', "칵테일6", 6),
                   _buildAlcoholTypeCard(
-                      context, 'assets/cocktail1.jpg', "칵테일7", 7),
+                      context, 'assets/req/cocktail1.jpg', "칵테일7", 7),
                 ],
               ),
             ),
           ),
           Positioned(
-            bottom: 450,
+            top: 170,
             left: 0,
             right: 0,
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: 8,
-              color: Color(0xFFD9D9D9),
+              color: const Color(0xFFD9D9D9),
             ),
           ),
           if (_selectedIndex != -1) // 만약 카드가 선택되었으면 상자들을 보여줌
             ...[
-            _buildBox(315, 20),
-            _buildBox(315, 150),
-            _buildBox(315, 280),
-            _buildBox(185, 20),
-            _buildBox(185, 150),
-            _buildBox(185, 280),
+            _buildBox(470, 20),
+            _buildBox(470, 150),
+            _buildBox(470, 280),
+            _buildBox(335, 20),
+            _buildBox(335, 150),
+            _buildBox(335, 280),
           ],
         ],
       ),
@@ -178,7 +179,7 @@ class _recipepageState extends State<recipepage> {
                     child: Center(
                       child: Text(
                         cocktailName,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 12,
                         ),
@@ -188,7 +189,7 @@ class _recipepageState extends State<recipepage> {
                 ),
               ],
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
           ],
         ),
       ),
