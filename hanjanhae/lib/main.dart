@@ -61,7 +61,7 @@ class _HanjanhaeState extends State<Hanjanhae> {
               ),
         ),
       ),
-      home: recipepage_test(),
+      home: const recipepage_test(),
     );
   }
 }
