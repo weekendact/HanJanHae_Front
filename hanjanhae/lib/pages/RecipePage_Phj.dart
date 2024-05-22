@@ -1,55 +1,32 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:hanjanhae/service/database_helper.dart';
+import 'package:hanjanhae/service/Database_Helper.dart';
 
-class recipepage_test extends StatefulWidget {
-  const recipepage_test({Key? key}) : super(key: key);
+class recipepage_phj extends StatefulWidget {
+  const recipepage_phj({Key? key}) : super(key: key);
 
   @override
-  State<recipepage_test> createState() => _RecipePageState();
+  State<recipepage_phj> createState() => _RecipePageState();
 }
 
-class _RecipePageState extends State<recipepage_test> {
+class _RecipePageState extends State<recipepage_phj> {
   int _selectedIndex = -1;
-  List<Map<String, dynamic>> cocktails = [];
+  Map<String, dynamic>? _selectedRecipeDetails;
+  final DatabaseHelper _dbHelper = DatabaseHelper();
 
   @override
   void initState() {
     super.initState();
-    _fetchCocktailsFromDatabase();
   }
 
-  Future<void> _fetchCocktailsFromDatabase() async {
-    final db = databasehelper();
-    final data = await db.getCocktails();
-    setState(() {
-      cocktails = data;
-    });
-  }
-
-  Future<void> sendCocktailInfoToDatabase(BuildContext context) async {
+  Future<void> _loadRecipeDetails(int id) async {
     try {
-      final response = await http.get(
-        Uri.parse("http://yourserver.com/api/cocktails"), // 실제 서버의 엔드포인트 URL
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-      );
-      if (response.statusCode == 200) {
-        final entries = jsonDecode(response.body) as List<dynamic>;
-        final db = databasehelper();
-
-        for (var entry in entries) {
-          await db.insertCocktail(entry['imageAsset'], entry['cocktailName']);
-        }
-
-        _fetchCocktailsFromDatabase();
-      } else {
-        print('Request failed with status: ${response.statusCode}.');
-      }
+      Map<String, dynamic> recipeDetails =
+          await _dbHelper.fetchRecipeDetails(id);
+      setState(() {
+        _selectedRecipeDetails = recipeDetails;
+      });
     } catch (e) {
-      print('An error occurred: $e');
+      print('Failed to load recipe details: $e');
     }
   }
 
@@ -58,6 +35,7 @@ class _RecipePageState extends State<recipepage_test> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        title: const Text('Recipe'),
       ),
       body: Stack(
         children: [
@@ -79,16 +57,24 @@ class _RecipePageState extends State<recipepage_test> {
             child: SizedBox(
               height: 150.0,
               width: MediaQuery.of(context).size.width,
-              child: ListView.builder(
+              child: ListView(
                 scrollDirection: Axis.horizontal,
-                itemCount: cocktails.length,
-                itemBuilder: (context, index) {
-                  return _buildAlcoholTypeCard(
-                      context,
-                      cocktails[index]['imageAsset'],
-                      cocktails[index]['cocktailName'],
-                      index);
-                },
+                children: [
+                  _buildAlcoholTypeCard(
+                      context, 'assets/alcohol_icon/tequila.png', "데킬라", 0, 1),
+                  _buildAlcoholTypeCard(
+                      context, 'assets/req/cocktail1.jpg', "칵테일2", 1, 2),
+                  _buildAlcoholTypeCard(
+                      context, 'assets/req/cocktail1.jpg', "칵테일3", 2, 3),
+                  _buildAlcoholTypeCard(
+                      context, 'assets/req/cocktail1.jpg', "칵테일4", 3, 4),
+                  _buildAlcoholTypeCard(
+                      context, 'assets/req/cocktail1.jpg', "칵테일5", 4, 5),
+                  _buildAlcoholTypeCard(
+                      context, 'assets/req/cocktail1.jpg', "칵테일6", 5, 6),
+                  _buildAlcoholTypeCard(
+                      context, 'assets/req/cocktail1.jpg', "칵테일7", 6, 7),
+                ],
               ),
             ),
           ),
@@ -102,34 +88,26 @@ class _RecipePageState extends State<recipepage_test> {
               color: const Color(0xFFD9D9D9),
             ),
           ),
-          if (_selectedIndex != -1) ...[
-            _buildBox(470, 20),
-            _buildBox(470, 150),
-            _buildBox(470, 280),
-            _buildBox(335, 20),
-            _buildBox(335, 150),
-            _buildBox(335, 280),
+          if (_selectedIndex != -1 && _selectedRecipeDetails != null) ...[
+            _buildBox(470, 20, _selectedRecipeDetails!['ingredient1']),
+            _buildBox(470, 150, _selectedRecipeDetails!['ingredient2']),
+            _buildBox(470, 280, _selectedRecipeDetails!['ingredient3']),
+            _buildBox(335, 20, _selectedRecipeDetails!['instruction1']),
+            _buildBox(335, 150, _selectedRecipeDetails!['instruction2']),
+            _buildBox(335, 280, _selectedRecipeDetails!['instruction3']),
           ],
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => sendCocktailInfoToDatabase(context),
-        child: const Icon(Icons.refresh),
       ),
     );
   }
 
-  Widget _buildBox(double bottom, double left) {
+  Widget _buildBox(double bottom, double left, String content) {
     return Positioned(
       bottom: bottom,
       left: left,
       child: GestureDetector(
         onTap: () {
-          setState(() {
-            if (_selectedIndex == -1) {
-              _selectedIndex = (bottom == 315) ? 0 : 1;
-            }
-          });
+          // 박스를 클릭했을 때 수행할 작업을 여기에 추가할 수 있습니다.
         },
         child: Container(
           width: 110,
@@ -138,10 +116,15 @@ class _RecipePageState extends State<recipepage_test> {
             color: Colors.blue,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: _selectedIndex == (bottom == 315)
-                  ? Colors.blue
-                  : Colors.transparent,
+              color: Colors.transparent,
               width: 3,
+            ),
+          ),
+          child: Center(
+            child: Text(
+              content,
+              style: const TextStyle(color: Colors.white, fontSize: 12),
+              textAlign: TextAlign.center,
             ),
           ),
         ),
@@ -149,17 +132,24 @@ class _RecipePageState extends State<recipepage_test> {
     );
   }
 
-  Widget _buildAlcoholTypeCard(
-      BuildContext context, String imageAsset, String cocktailName, int index) {
+  Widget _buildAlcoholTypeCard(BuildContext context, String imageAsset,
+      String cocktailName, int index, int id) {
     bool isSelected = _selectedIndex == index;
 
     return SizedBox(
       width: 130,
       child: GestureDetector(
-        onTap: () {
+        onTap: () async {
           setState(() {
             _selectedIndex = _selectedIndex == index ? -1 : index;
           });
+          if (_selectedIndex == index) {
+            await _loadRecipeDetails(id);
+          } else {
+            setState(() {
+              _selectedRecipeDetails = null;
+            });
+          }
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
