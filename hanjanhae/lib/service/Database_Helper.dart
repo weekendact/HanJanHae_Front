@@ -12,6 +12,9 @@ class DatabaseHelper {
 
   static Database? _database;
 
+  // 엔드포인트 부분
+  final String baseUrl = 'https://가나다라마바사.com'; // 여기에 실제 API URL을 입력
+
   Future<Database> get database async {
     if (_database != null) return _database!;
     _database = await _initDatabase();
@@ -59,10 +62,13 @@ class DatabaseHelper {
   }
 
   // API Helper methods
-  final String baseUrl = 'https://yourapiurl.com'; // 여기에 실제 API URL을 입력하세요
 
   Future<List<dynamic>> fetchRecipes() async {
-    final response = await http.get(Uri.parse('$baseUrl/recipes'));
+    final response = await http.post(
+      Uri.parse('$baseUrl/recipes'), // API 엔드포인트
+      //Uri.parse('${ApiConstants.baseUrl}/recipes'),
+      headers: {'Content-Type': 'application/json'},
+    );
 
     if (response.statusCode == 200) {
       return json.decode(response.body);
@@ -72,10 +78,15 @@ class DatabaseHelper {
   }
 
   Future<Map<String, dynamic>> fetchRecipeDetails(int id) async {
-    final response = await http.post(Uri.parse('$baseUrl/recipes/$id'));
+    final response = await http.post(
+      Uri.parse('$baseUrl/recipes/details'), // API 엔드포인트
+      //Uri.parse('${ApiConstants.baseUrl}/recipes/details'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({'id': id}),
+    );
 
     if (response.statusCode == 200) {
-      return json.decode(response.body);
+      return json.decode(response.body) as Map<String, dynamic>;
     } else {
       throw Exception('Failed to load recipe details');
     }
@@ -83,7 +94,8 @@ class DatabaseHelper {
 
   Future<void> addRecipe(Map<String, dynamic> recipe) async {
     final response = await http.post(
-      Uri.parse('$baseUrl/recipes'),
+      Uri.parse('$baseUrl/recipes/add'), // API 엔드포인트
+      //Uri.parse('${ApiConstants.baseUrl}/recipes/add'),
       headers: {'Content-Type': 'application/json'},
       body: json.encode(recipe),
     );
@@ -94,10 +106,11 @@ class DatabaseHelper {
   }
 
   Future<void> updateRecipeApi(int id, Map<String, dynamic> recipe) async {
-    final response = await http.put(
-      Uri.parse('$baseUrl/recipes/$id'),
+    final response = await http.post(
+      Uri.parse('$baseUrl/recipes/update'), // API 엔드포인트
+      //Uri.parse('${ApiConstants.baseUrl}/recipes/update'),
       headers: {'Content-Type': 'application/json'},
-      body: json.encode(recipe),
+      body: json.encode({'id': id, ...recipe}),
     );
 
     if (response.statusCode != 200) {
@@ -106,8 +119,11 @@ class DatabaseHelper {
   }
 
   Future<void> deleteRecipeApi(int id) async {
-    final response = await http.delete(
-      Uri.parse('$baseUrl/recipes/$id'),
+    final response = await http.post(
+      Uri.parse('$baseUrl/recipes/delete'), // API 엔드포인트
+      //Uri.parse('${ApiConstants.baseUrl}/recipes/delete'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({'id': id}),
     );
 
     if (response.statusCode != 200) {

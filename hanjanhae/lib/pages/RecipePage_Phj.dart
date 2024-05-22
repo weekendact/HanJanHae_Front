@@ -10,7 +10,7 @@ class recipepage_phj extends StatefulWidget {
 
 class _RecipePageState extends State<recipepage_phj> {
   int _selectedIndex = -1;
-  Map<String, dynamic>? _selectedRecipeDetails;
+  List<String> _recipeDetails = [];
   final DatabaseHelper _dbHelper = DatabaseHelper();
 
   @override
@@ -23,7 +23,10 @@ class _RecipePageState extends State<recipepage_phj> {
       Map<String, dynamic> recipeDetails =
           await _dbHelper.fetchRecipeDetails(id);
       setState(() {
-        _selectedRecipeDetails = recipeDetails;
+        _recipeDetails = [];
+        recipeDetails.forEach((key, value) {
+          _recipeDetails.add(value.toString());
+        });
       });
     } catch (e) {
       print('Failed to load recipe details: $e');
@@ -88,17 +91,28 @@ class _RecipePageState extends State<recipepage_phj> {
               color: const Color(0xFFD9D9D9),
             ),
           ),
-          if (_selectedIndex != -1 && _selectedRecipeDetails != null) ...[
-            _buildBox(470, 20, _selectedRecipeDetails!['ingredient1']),
-            _buildBox(470, 150, _selectedRecipeDetails!['ingredient2']),
-            _buildBox(470, 280, _selectedRecipeDetails!['ingredient3']),
-            _buildBox(335, 20, _selectedRecipeDetails!['instruction1']),
-            _buildBox(335, 150, _selectedRecipeDetails!['instruction2']),
-            _buildBox(335, 280, _selectedRecipeDetails!['instruction3']),
-          ],
+          if (_selectedIndex != -1 && _recipeDetails.isNotEmpty)
+            ..._buildDynamicBoxes(_recipeDetails),
         ],
       ),
     );
+  }
+
+  List<Widget> _buildDynamicBoxes(List<String> details) {
+    List<Widget> boxes = [];
+    double bottom = 470;
+    double left = 20;
+
+    for (int i = 0; i < details.length; i++) {
+      boxes.add(_buildBox(bottom, left, details[i]));
+      left += 130;
+      if (left + 110 > MediaQuery.of(context).size.width) {
+        left = 20;
+        bottom -= 140;
+      }
+    }
+
+    return boxes;
   }
 
   Widget _buildBox(double bottom, double left, String content) {
@@ -107,7 +121,23 @@ class _RecipePageState extends State<recipepage_phj> {
       left: left,
       child: GestureDetector(
         onTap: () {
-          // 박스를 클릭했을 때 수행할 작업을 여기에 추가할 수 있습니다.
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Box Tapped'),
+                content: Text('You tapped on: $content'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('OK'),
+                  ),
+                ],
+              );
+            },
+          );
         },
         child: Container(
           width: 110,
@@ -147,7 +177,7 @@ class _RecipePageState extends State<recipepage_phj> {
             await _loadRecipeDetails(id);
           } else {
             setState(() {
-              _selectedRecipeDetails = null;
+              _recipeDetails = [];
             });
           }
         },
@@ -202,10 +232,8 @@ class _RecipePageState extends State<recipepage_phj> {
                     child: Center(
                       child: Text(
                         cocktailName,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                        ),
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 12),
                       ),
                     ),
                   ),
