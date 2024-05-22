@@ -1,11 +1,12 @@
 // ignore_for_file: unnecessary_import, file_names
-import 'package:carousel_slider/carousel_slider.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hanjanhae/pages/AIChatPage.dart';
 import 'package:hanjanhae/pages/SearchPage.dart';
 import 'package:hanjanhae/service/Variable.dart';
+import 'package:hanjanhae/service/userSecureStorageService.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -199,7 +200,7 @@ class _HomePageState extends State<HomePage> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10.0),
                         child: Image.asset(
-                          'assets/cocktail.jpeg',
+                          Liqur[0][1],
                           fit: BoxFit.cover,
                           height: 200.0,
                           width: 250.0,

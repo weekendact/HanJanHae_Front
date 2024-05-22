@@ -36,3 +36,21 @@ class SecureStorageService {
     await userStorage.deleteAll();
   }
 }
+
+
+final List<dynamic> Liqur = List.from(
+  [
+  [
+    "보드키",
+    "assets/cocktail.jpeg"
+  ],
+  [
+    "진",
+    ""
+  ],
+  [
+    "데킬라",
+    ""
+  ],
+]
+);
