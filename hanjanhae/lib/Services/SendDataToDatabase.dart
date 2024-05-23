@@ -2,7 +2,7 @@
 import 'dart:convert';
 import 'package:hanjanhae/DatabaseUrlAdress.dart';
 import 'package:http/http.dart' as http;
-import 'package:hanjanhae/service/userSecureStorageService.dart';
+import 'package:hanjanhae/Services/UserSecureStorageService.dart';
 
 void sendDataToDatabase(String id, String email, String apiUrl) async {
   // 유저 정보 데이터베이스 전송 함수
