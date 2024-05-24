@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hanjanhae/pages/MainPage.dart';
+import 'package:hanjanhae/pages/TestPage.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
 
@@ -44,28 +45,29 @@ class _HanjanhaeState extends State<Hanjanhae> {
         ),
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
-            foregroundColor: const MaterialStatePropertyAll(Colors.black),
-            overlayColor: MaterialStateColor.resolveWith(
+            foregroundColor: const WidgetStatePropertyAll(Colors.black),
+            overlayColor: WidgetStateColor.resolveWith(
               (states) => Colors.transparent,
             ), // 텍스트 버튼 애니메이션 제거
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
-            overlayColor: MaterialStateColor.resolveWith(
+            overlayColor: WidgetStateColor.resolveWith(
               (states) => Colors.transparent,
             ), // Elevated 버튼 애니메이션 제거
           ),
         ),
         iconButtonTheme: IconButtonThemeData(
           style: ButtonStyle(
-              overlayColor: MaterialStateColor.resolveWith(
+              overlayColor: WidgetStateColor.resolveWith(
             (states) => Colors.transparent,
           ) // 아이콘 버튼 애니메이션 제거
               ),
         ),
       ),
-      home: const MainPage(),
+      // home: const MainPage(),
+      home: const TestPage(),
     );
   }
 }

@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final CarouselController _controller = CarouselController();
+  // final CarouselController _controller = CarouselController();
 
   @override
   Widget build(BuildContext context) {
@@ -75,12 +75,12 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(
                       height: 15.0,
                     ),
-                    Center(
-                      child: SizedBox(
-                        width: 300,
-                        child: sliderWidget(),
-                      ),
-                    ),
+                    // Center(
+                    //   child: SizedBox(
+                    //     width: 300,
+                    //     child: sliderWidget(),
+                    //   ),
+                    // ),
                     ///////////////////////////////////phj//////////////////////////////
                     const SizedBox(
                       height: 50.0,
@@ -254,52 +254,52 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget sliderWidget() {
-    return CarouselSlider(
-      carouselController: _controller,
-      items: imageList.asMap().entries.map(
-        (entry) {
-          int index = entry.key;
-          String imgLink = entry.value;
-          return Builder(
-            builder: (context) {
-              return Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Image(
-                        fit: BoxFit.cover,
-                        image: AssetImage(imgLink),
-                        height: 300,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 170,
-                    left: 53,
-                    child: hotcocktailname(index),
-                  )
-                ],
-              );
-            },
-          );
-        },
-      ).toList(),
-      options: CarouselOptions(
-        height: 250,
-        viewportFraction: 1.0,
-        autoPlay: true,
-        autoPlayInterval: const Duration(seconds: 10),
-        onPageChanged: (index, reason) {
-          setState(() {
-            current = index;
-          });
-        },
-      ),
-    );
-  }
+  // Widget sliderWidget() {
+  //   return CarouselSlider(
+  //     carouselController: _controller,
+  //     items: imageList.asMap().entries.map(
+  //       (entry) {
+  //         int index = entry.key;
+  //         String imgLink = entry.value;
+  //         return Builder(
+  //           builder: (context) {
+  //             return Stack(
+  //               children: [
+  //                 ClipRRect(
+  //                   borderRadius: BorderRadius.circular(20.0),
+  //                   child: SizedBox(
+  //                     width: MediaQuery.of(context).size.width,
+  //                     child: Image(
+  //                       fit: BoxFit.cover,
+  //                       image: AssetImage(imgLink),
+  //                       height: 300,
+  //                     ),
+  //                   ),
+  //                 ),
+  //                 Positioned(
+  //                   top: 170,
+  //                   left: 53,
+  //                   child: hotcocktailname(index),
+  //                 )
+  //               ],
+  //             );
+  //           },
+  //         );
+  //       },
+  //     ).toList(),
+  //     options: CarouselOptions(
+  //       height: 250,
+  //       viewportFraction: 1.0,
+  //       autoPlay: true,
+  //       autoPlayInterval: const Duration(seconds: 10),
+  //       onPageChanged: (index, reason) {
+  //         setState(() {
+  //           current = index;
+  //         });
+  //       },
+  //     ),
+  //   );
+  // }
 
   Widget hotcocktailname(int index) {
     String cocktailName = '';

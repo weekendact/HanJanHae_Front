@@ -1,6 +1,8 @@
 // ignore_for_file: file_names, unnecessary_string_interpolations, avoid_print, unnecessary_brace_in_string_interps, unused_local_variable, unnecessary_null_comparison
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:hanjanhae/DatabaseUrlAddresses.dart';
+import 'package:hanjanhae/service/Variable.dart';
 import 'package:http/http.dart' as http;
 import 'package:hanjanhae/service/userSecureStorageService.dart';
 
@@ -56,6 +58,41 @@ Future<void> sendTokenToDatabase(Future<String?> token, String apiUrl) async {
       // },
     );
     if (response.statusCode == 200) {
+      print('send');
+    } else {
+      print('error ${response.statusCode}');
+    }
+  } catch (error) {
+    print('send error : $error');
+  }
+}
+
+Future<void> sendBaseLiquorToDatabase(String baseLiquor, String apiUrl) async {
+  String headerValue = Uri.encodeComponent('보드카');
+
+  var headers = {
+  'Content-Type': 'application/json',
+  'Custom-Header': headerValue, // 인코딩된 '보드카'
+};
+  Map<String, String> body = {
+    'drinkTypeName': baseLiquor,
+  };
+
+  String jsonBody = jsonEncode(body);
+
+  try {
+    final response = await http.post(
+      Uri.parse("${ApiConstants.baseUrl}$apiUrl"),
+      headers: headers,
+      // headers: {
+      //   'Content-Type': 'application/json; charset=UTF-8',
+      //   'Custom-Header': headerValue,
+      // },
+      // body: jsonBody,
+    );
+    if (response.statusCode == 200) {
+      drinks = jsonDecode(response.body) as List<dynamic>;
+      print(drinks);
       print('send');
     } else {
       print('error ${response.statusCode}');

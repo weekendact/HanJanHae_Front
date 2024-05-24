@@ -1,9 +1,9 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:hanjanhae/DatabaseUrlAddresses.dart';
+// import 'package:hanjanhae/DatabaseUrlAddresses.dart';
 import 'package:hanjanhae/pages/LoginPage.dart';
-import 'package:hanjanhae/service/SendLoginDataToDatabaseService.dart';
+// import 'package:hanjanhae/service/SendLoginDataToDatabaseService.dart';
 
 void signInWithGoogle(BuildContext context) async {
   // 구글 로그인
@@ -22,5 +22,8 @@ void signInWithGoogle(BuildContext context) async {
   String googleId = googleUser.id;
   var googleEmail = googleUser.email;
 
-  sendDataToDatabase(googleId, googleEmail, Endpoints.signUpUrl); // 데이터베이스 전송
+  print(googleId);
+  print(googleEmail);
+
+  // sendDataToDatabase(googleId, googleEmail, Endpoints.signUpUrl); // 데이터베이스 전송
 }
