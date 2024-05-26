@@ -12,21 +12,25 @@ class RecipepageTest extends StatefulWidget {
 }
 
 class Liqur {
-  final String image;
-  late final String id;
+  final String cocktailPicture;
+  late final String cocktailName;
 
-  Liqur({required this.image, required this.id});
+  Liqur({required this.cocktailPicture, required this.cocktailName});
 
   factory Liqur.fromJson(Map<String, dynamic> json) {
-    return Liqur(image: json['image'], id: json['id']);
+    return Liqur(
+        cocktailPicture: json['cocktailPicture'],
+        cocktailName: json['cocktailName']);
   }
 }
 
 class _RecipePageState extends State<RecipepageTest> {
+  List<Liqur> _liqurList = [];
   @override
   void initState() {
     super.initState();
     sendLiqurInfoToDatabase();
+    fetchLiqurData();
   }
 
   String url = "";
@@ -53,6 +57,13 @@ class _RecipePageState extends State<RecipepageTest> {
     return list;
   }
 
+  Future<void> fetchLiqurData() async {
+    List<Liqur> liqurList = await sendLiqurInfoToDatabase();
+    setState(() {
+      _liqurList = liqurList;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Liqur>>(
@@ -63,8 +74,7 @@ class _RecipePageState extends State<RecipepageTest> {
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
-          return recipepaget(
-              liqurList: snapshot.data!); // 데이터가 준비되면 recipepaget 위젯에 데이터를 전달
+          return recipepaget(liqurList: _liqurList);
         }
       },
     );

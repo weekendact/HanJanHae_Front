@@ -21,7 +21,6 @@ class _RecipePageState extends State<recipepaget> {
 
   @override
   Widget build(BuildContext context) {
-    var snapshot;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -49,31 +48,11 @@ class _RecipePageState extends State<recipepaget> {
               width: MediaQuery.of(context).size.width,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: snapshot.data != null
-                    ? List.generate(
-                        snapshot.data!.length,
-                        (index) => _buildAlcoholTypeCard(
-                            context, widget.liqurList[index], index),
-                      )
-                    : [Container()],
-                /*
-                    [
-                  _buildAlcoholTypeCard(context,
-                      Liqur(image: 'assets/req/cocktail.jpeg', id: 'ID1'), 0),
-                  _buildAlcoholTypeCard(context,
-                      Liqur(image: 'assets/req/cocktail.jpeg', id: 'ID2'), 1),
-                  _buildAlcoholTypeCard(context,
-                      Liqur(image: 'assets/req/cocktail.jpeg', id: 'ID3'), 2),
-                  _buildAlcoholTypeCard(context,
-                      Liqur(image: 'assets/req/cocktail.jpeg', id: 'ID1'), 3),
-                  _buildAlcoholTypeCard(context,
-                      Liqur(image: 'assets/req/cocktail.jpeg', id: 'ID1'), 4),
-                  _buildAlcoholTypeCard(context,
-                      Liqur(image: 'assets/req/cocktail.jpeg', id: 'ID1'), 5),
-                  _buildAlcoholTypeCard(context,
-                      Liqur(image: 'assets/req/cocktail.jpeg', id: 'ID1'), 6),                
-                ],
-                    */
+                children: List.generate(
+                  widget.liqurList.length,
+                  (index) => _buildAlcoholTypeCard(
+                      context, widget.liqurList[index], index),
+                ),
               ),
             ),
           ),
@@ -128,7 +107,7 @@ class _RecipePageState extends State<recipepaget> {
                     borderRadius: BorderRadius.circular(8),
                     image: DecorationImage(
                       image: selectedImages[index] ??
-                          AssetImage(widget.liqurList[index].image),
+                          AssetImage(widget.liqurList[index].cocktailPicture),
                       fit: BoxFit.cover,
                     ),
                     border: Border.all(
@@ -169,7 +148,7 @@ class _RecipePageState extends State<recipepaget> {
                     ),
                     child: Center(
                       child: Text(
-                        widget.liqurList[index].id,
+                        widget.liqurList[index].cocktailName,
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 12,
@@ -198,8 +177,8 @@ class _RecipePageState extends State<recipepaget> {
             // 현재 선택된 카드를 다시 탭하면 선택 해제
             _selectedLiqur = isSelected == index ? -1 : index;
           });
-          String imageUrl = liqur.image;
-          String id = liqur.id;
+          String imageUrl = liqur.cocktailPicture;
+          String id = liqur.cocktailName;
           _updateSelectedData(imageUrl, id);
           try {
             final response = await http.post(Uri.parse(imageUrl));
@@ -225,7 +204,8 @@ class _RecipePageState extends State<recipepaget> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     image: DecorationImage(
-                      image: selectedImages[index] ?? AssetImage(liqur.image),
+                      image: selectedImages[index] ??
+                          AssetImage(liqur.cocktailPicture),
                       fit: BoxFit.cover,
                     ),
                     border: Border.all(
@@ -266,7 +246,7 @@ class _RecipePageState extends State<recipepaget> {
                     ),
                     child: Center(
                       child: Text(
-                        liqur.id,
+                        liqur.cocktailName,
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 12,
@@ -287,7 +267,7 @@ class _RecipePageState extends State<recipepaget> {
   void _updateSelectedData(String imageUrl, String id) {
     setState(() {
       selectedImages[_selectedLiqur] = NetworkImage(imageUrl);
-      widget.liqurList[_selectedLiqur].id = id;
+      widget.liqurList[_selectedLiqur].cocktailName = id;
     });
   }
 }
