@@ -20,6 +20,7 @@ dependencies:
   flutter_naver_login: ^1.8.0 # 네이버 로그인 패키지
   flutter_bloc: ^8.1.5 # 상태 관리 패키지
   flutter_secure_storage: ^9.0.0 # 데이터 암호화 데이터베이스 패키지
+  test: ^1.25.2
 
 dev_dependencies:
   flutter_test:

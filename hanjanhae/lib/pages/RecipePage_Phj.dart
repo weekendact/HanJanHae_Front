@@ -20,10 +20,10 @@ class _RecipePageState extends State<recipepage_phj> {
     super.initState();
   }
 
-  Future<void> _loadRecipeDetails(int id) async {
+  Future<void> _loadRecipeDetails(String cocktailName) async {
     try {
       Map<String, dynamic> recipeDetails =
-          await _dbHelper.fetchRecipeDetails(id);
+          await _dbHelper.fetchRecipeDetails(cocktailName);
       setState(() {
         _recipeDetails = [];
         _imageUrls = [];
@@ -226,7 +226,7 @@ class _RecipePageState extends State<recipepage_phj> {
             _selectedIndex = _selectedIndex == index ? -1 : index;
           });
           if (_selectedIndex == index) {
-            await _loadRecipeDetails(id);
+            await _loadRecipeDetails(cocktailName);
           } else {
             setState(() {
               _recipeDetails = [];

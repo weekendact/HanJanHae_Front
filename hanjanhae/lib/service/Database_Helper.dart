@@ -15,7 +15,7 @@ class DatabaseHelper {
   static Database? _database;
 
   final String baseUrl =
-      'http://10.200.236.202:8080'; // Update with your actual API URL
+      'http://10.200.32.76:8080'; // Update with your actual API URL
 
   String? _cocktailName; // Variable to store cocktail name
 
@@ -76,7 +76,7 @@ class DatabaseHelper {
   Future<String?> fetchImage(int id) async {
     try {
       final response = await http.post(
-        Uri.parse('$baseUrl/recipes/image'),
+        Uri.parse('$baseUrl/drink/cocktails/search'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'id': id}),
       );
@@ -115,12 +115,12 @@ class DatabaseHelper {
   }
 
   // Method to fetch details of a specific recipe from the server
-  Future<Map<String, dynamic>> fetchRecipeDetails(int id) async {
+  Future<Map<String, dynamic>> fetchRecipeDetails(String cocktailName) async {
     try {
       final response = await http.post(
         Uri.parse('$baseUrl/drink/cocktails/search'), // API endpoint
         headers: {'Content-Type': 'application/json'},
-        body: json.encode({'id': id}),
+        body: json.encode({'cocktailName': cocktailName}),
       );
 
       if (response.statusCode == 200) {
@@ -135,7 +135,8 @@ class DatabaseHelper {
           }
         });
 
-        _cocktailName = data['name']; // Store cocktail name received from API
+        _cocktailName =
+            data['cocktailName']; // Store cocktail name received from API
         return data;
       } else {
         throw Exception(
