@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Row(
                 children: [
                   Image.asset(
-                    'kakaoicon.png',
+                    'assets/images/kakaoicon.png',
                     width: 30,
                     height: 30,
                   ),
