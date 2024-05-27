@@ -117,7 +117,28 @@ class _RecipePageState extends State<recipepage_scw> {
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                   return const Center(child: Text('No data available'));
                 } else {
-                  return _buildCocktailList(snapshot.data!);
+                  return Positioned(
+                    top: 180,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: GridView.builder(
+                      padding: const EdgeInsets.all(10),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: 0.75,
+                      ),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        final cocktail = snapshot.data![index];
+                        return _buildBox(
+                            cocktail.cocktailName, cocktail.cocktailPicture);
+                      },
+                    ),
+                  );
                 }
               },
             ),
@@ -126,30 +147,50 @@ class _RecipePageState extends State<recipepage_scw> {
     );
   }
 
-  Widget _buildCocktailList(List<CocktailDetails> cocktails) {
-    return ListView.builder(
-      itemCount: cocktails.length,
-      itemBuilder: (context, index) {
-        final cocktail = cocktails[index];
-        return _buildBox(cocktail.cocktailName, cocktail.cocktailPicture);
-      },
-    );
-  }
-
   Widget _buildBox(String name, String picture) {
-    return Container(
-      margin: const EdgeInsets.all(10),
-      child: Column(
-        children: [
-          Image.network(
+    return Column(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Image.network(
             picture,
-            height: 100,
-            width: 100,
+            height: 110,
+            width: 110,
             fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return Container(
+                height: 110,
+                width: 110,
+                color: Colors.grey,
+                child: const Icon(
+                  Icons.broken_image,
+                  color: Colors.white,
+                ),
+              );
+            },
           ),
-          Text(name),
-        ],
-      ),
+        ),
+        const SizedBox(height: 8),
+        Container(
+          width: 110,
+          padding: const EdgeInsets.symmetric(vertical: 4),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.7),
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(8),
+              bottomRight: Radius.circular(8),
+            ),
+          ),
+          child: Text(
+            name,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 14,
+            ),
+          ),
+        ),
+      ],
     );
   }
 
