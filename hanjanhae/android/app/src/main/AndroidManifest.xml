@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
     
                 <!-- Redirect URI, "kakao${YOUR_NATIVE_APP_KEY}://oauth" 형식 -->
-                <data android:scheme="kakao${YOUR_NATIVE_APP_KEY}" android:host="oauth"/>
+                <data android:scheme="kakao61c625d463e984405890bd99a3030f99" android:host="oauth"/>
             </intent-filter>
         </activity>
             <!-- Specifies an Android theme to apply to this Activity as soon as
