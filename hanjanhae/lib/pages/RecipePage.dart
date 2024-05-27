@@ -41,19 +41,19 @@ class _RecipePageState extends State<recipepage> {
                 scrollDirection: Axis.horizontal,
                 children: [
                   _buildAlcoholTypeCard(
-                      context, 'assets/alcohol_icon/tequila.png', "데킬라", 0),
+                      context, 'assets/alcohol_icon/tequila.png', "리큐르", 0),
                   _buildAlcoholTypeCard(
-                      context, 'assets/req/cocktail1.jpg', "칵테일2", 1),
+                      context, 'assets/req/cocktail1.jpg', "럼", 1),
                   _buildAlcoholTypeCard(
-                      context, 'assets/req/cocktail1.jpg', "칵테일3", 2),
+                      context, 'assets/req/cocktail1.jpg', "보드카", 2),
                   _buildAlcoholTypeCard(
-                      context, 'assets/req/cocktail1.jpg', "칵테일4", 3),
+                      context, 'assets/req/cocktail1.jpg', "데킬라", 3),
                   _buildAlcoholTypeCard(
-                      context, 'assets/req/cocktail1.jpg', "칵테일5", 5),
+                      context, 'assets/req/cocktail1.jpg', "진", 5),
                   _buildAlcoholTypeCard(
-                      context, 'assets/req/cocktail1.jpg', "칵테일6", 6),
+                      context, 'assets/req/cocktail1.jpg', "위스키", 6),
                   _buildAlcoholTypeCard(
-                      context, 'assets/req/cocktail1.jpg', "칵테일7", 7),
+                      context, 'assets/req/cocktail1.jpg', "무알콜", 7),
                 ],
               ),
             ),
@@ -86,28 +86,56 @@ class _RecipePageState extends State<recipepage> {
     return Positioned(
       bottom: bottom,
       left: left,
-      child: GestureDetector(
-        onTap: () {
-          setState(() {
-            // 선택된 카드가 없으면 선택 처리
-            if (_selectedIndex == -1) {
-              _selectedIndex = (bottom == 315) ? 0 : 1;
-            }
-          });
-        },
-        child: Container(
-          width: 110,
-          height: 110,
-          decoration: BoxDecoration(
-            color: Colors.blue, // 상자 색상
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: _selectedIndex == (bottom == 315)
-                  ? Colors.blue
-                  : Colors.transparent, // 테두리 색상
-              width: 3,
+      child: SizedBox(
+        width: 110,
+        height: 150, // 이미지와 텍스트를 포함한 전체 높이
+        child: Stack(
+          children: [
+            // 이미지
+            Positioned(
+              top: 0,
+              left: 0,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8), // 둥근 모서리
+                child: SizedBox(
+                  width: 110,
+                  height: 110, // 이미지의 높이
+                  child: Image.asset(
+                    'assets/req/cocktail.jpeg', // 여기에 이미지 경로 입력
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
             ),
-          ),
+            // 컨테이너
+            Positioned(
+              bottom: 40,
+              left: 0,
+              child: Container(
+                width: 110, // 컨테이너의 너비
+                height: 30, // 컨테이너의 높이
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.7),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(8),
+                    bottomRight: Radius.circular(8),
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    '칵이름',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      height: 0.11,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -181,7 +209,7 @@ class _RecipePageState extends State<recipepage> {
                         cocktailName,
                         style: const TextStyle(
                           color: Colors.black,
-                          fontSize: 12,
+                          fontSize: 15,
                         ),
                       ),
                     ),

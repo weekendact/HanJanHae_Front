@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:hanjanhae/pages/RecipePage.dart';
 import 'package:hanjanhae/pages/RecipePage_Phj.dart';
 import 'package:hanjanhae/pages/RecipePage_Jmj.dart';
+import 'package:hanjanhae/pages/RecipePage_scw.dart';
 
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
@@ -63,7 +64,7 @@ class _HanjanhaeState extends State<Hanjanhae> {
               ),
         ),
       ),
-      home: const RecipepageTest(),
+      home: const recipepage_phj(),
     );
   }
 }

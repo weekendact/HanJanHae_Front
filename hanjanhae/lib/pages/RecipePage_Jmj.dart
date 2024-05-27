@@ -33,7 +33,7 @@ class _RecipePageState extends State<RecipepageTest> {
     fetchLiqurData();
   }
 
-  String url = "";
+  String url = "http://10.200.236.202:8080/drink/cocktails/search";
   Future<List<Liqur>> sendLiqurInfoToDatabase() async {
     List<Liqur> list = [];
     try {
