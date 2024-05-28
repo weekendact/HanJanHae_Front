@@ -33,8 +33,9 @@ void signInWithKakao(BuildContext context) async {
         kakaoUser['kakao_account']['has_email']) {
       kakaoEmail = kakaoUser['kakao_account']['email'];
     }
-
-    sendDataToDatabase(kakaoId, kakaoEmail, Endpoints.signUpUrl); // 데이터베이스 전송
+    print(kakaoEmail);
+    print(kakaoId);
+    // sendDataToDatabase(kakaoId, kakaoEmail, Endpoints.signUpUrl); // 데이터베이스 전송
 
     Future<String?> jwt = SecureStorageService().selectToken();
     await sendTokenToDatabase(jwt, Endpoints.nicknameDuplicateUrl);

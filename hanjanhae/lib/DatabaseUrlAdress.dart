@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 class ApiConstants {
-  static const String baseUrl = "http://10.200.32.65:8080/users";
+  static const String baseUrl = "http://192.168.171.150:8080/users";
 }
 
 class Endpoints {
