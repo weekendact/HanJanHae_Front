@@ -10,7 +10,7 @@ void sendDataToDatabase(String id, String email, String apiUrl) async {
   // 유저 정보 데이터베이스 전송 함수
   Map<String, String> body = {
     'usersSocialId': id,
-    'usersEmail': email,
+    'usersSocialEmail': email,
   };
   String jsonBody = json.encode(body); // json 형식으로 변환
 

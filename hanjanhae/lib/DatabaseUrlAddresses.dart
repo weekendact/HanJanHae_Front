@@ -1,13 +1,14 @@
 // ignore_for_file: file_names
 
 class ApiConstants {
-  static const String baseUrl = "http://10.200.73.72:8080/";
+  static const String baseUrl = "http://10.200.72.102:8080/";
 }
 
 class Endpoints {
   // 로그인 관련
   static const String signUpUrl = "users/socialSignUp"; // 소셜 회원가입
-  static const String logInUrl = "users/socialLogin"; // 소셜 로그인
+  static const String joinUrl = "users/join"; // test
+  static const String logInUrl = "login"; // 소셜 로그인
   static const String nicknameDuplicateUrl = "users/nicknameDuplicate"; // 닉네임 중복 확인
   static const String userDetailUrl = "users/usersSaveDetails"; // 유저 상세정보
 

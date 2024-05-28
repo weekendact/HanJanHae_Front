@@ -16,6 +16,9 @@ void signInWithNaver(BuildContext context) async {
     String naverId = naverResult.account.id;
     var naverEmail = naverResult.account.email;
 
-    sendDataToDatabase(naverId, naverEmail, Endpoints.signUpUrl);
+    print(naverId);
+    print(naverEmail);
+
+    // sendDataToDatabase(naverId, naverEmail, Endpoints.signUpUrl);
   }
 }
