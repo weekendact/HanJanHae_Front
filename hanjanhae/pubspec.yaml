@@ -35,6 +35,7 @@ flutter:
     - assets/req/cocktail1.jpg
     - assets/req/cocktail2.jpg
     - assets/req/cocktail3.jpg
+    - assets/AI/Ai_Picture.jpg
 
   fonts:
     - family: Jalnan
