@@ -31,11 +31,11 @@ flutter:
   uses-material-design: true
   assets:
     - assets/alcohol_icon/tequila.png
-    - assets/req/cocktail.jpeg
-    - assets/req/cocktail1.jpg
-    - assets/req/cocktail2.jpg
-    - assets/req/cocktail3.jpg
-    - assets/AI/Ai_Picture.jpg
+    - assets/alcohol_icon/liqueur.png
+    - assets/alcohol_icon/rum.png
+    - assets/alcohol_icon/vodka.png
+    - assets/alcohol_icon/gin.png
+    - assets/alcohol_icon/whiskey.png
 
   fonts:
     - family: Jalnan

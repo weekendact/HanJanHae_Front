@@ -54,17 +54,17 @@ class _RecipePageState extends State<recipepage> {
                 scrollDirection: Axis.horizontal,
                 children: [
                   _buildAlcoholTypeCard(
-                      context, 'assets/alcohol_icon/tequila.png', "리큐르", 0, 1),
+                      context, 'assets/alcohol_icon/liqueur.png', "리큐르", 0, 1),
                   _buildAlcoholTypeCard(
-                      context, 'assets/req/cocktail1.jpg', "럼", 1, 2),
+                      context, 'assets/alcohol_icon/rum.png', "럼", 1, 2),
                   _buildAlcoholTypeCard(
-                      context, 'assets/req/cocktail1.jpg', "보드카", 2, 3),
+                      context, 'assets/alcohol_icon/vodka.png', "보드카", 2, 3),
                   _buildAlcoholTypeCard(
-                      context, 'assets/req/cocktail1.jpg', "데킬라", 3, 4),
+                      context, 'assets/alcohol_icon/tequila.png', "데킬라", 3, 4),
                   _buildAlcoholTypeCard(
-                      context, 'assets/req/cocktail1.jpg', "진", 4, 5),
+                      context, 'assets/alcohol_icon/gin.png', "진", 4, 5),
                   _buildAlcoholTypeCard(
-                      context, 'assets/req/cocktail1.jpg', "위스키", 5, 6),
+                      context, 'assets/alcohol_icon/whiskey.png', "위스키", 5, 6),
                   _buildAlcoholTypeCard(
                       context, 'assets/req/cocktail1.jpg', "무알콜", 6, 7),
                 ],
