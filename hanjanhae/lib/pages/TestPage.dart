@@ -20,7 +20,7 @@ class _TestPageState extends State<TestPage> {
     return Scaffold(
       body: Center(
         child: TextButton(
-          onPressed: () => signInWithGoogle(context),
+          onPressed: () => signInWithKakao(context),
           child: const Text('버튼'),
         ),
       ),
