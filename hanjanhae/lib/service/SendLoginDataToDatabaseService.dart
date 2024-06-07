@@ -1,12 +1,36 @@
 // ignore_for_file: file_names, unnecessary_string_interpolations, avoid_print, unnecessary_brace_in_string_interps, unused_local_variable, unnecessary_null_comparison
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hanjanhae/DatabaseUrlAddresses.dart';
 import 'package:hanjanhae/service/Variable.dart';
 import 'package:http/http.dart' as http;
 import 'package:hanjanhae/service/userSecureStorageService.dart';
 
-void sendDataToDatabase(String id, String email, String apiUrl) async {
+Future<void> sendTestToDatabase() async {
+
+  dynamic saveToken = await SecureStorageService().selectToken() as dynamic;
+
+  try {
+    final response = await http.post(
+      Uri.parse("${ApiConstants.baseUrl}${Endpoints.testaUrl}"),  // http://10.200.32.200:8080/testa
+      headers: <String, String>{
+        'Content-Type': 'application/json;', // charset=UTF-8',
+        'Authorization': '$saveToken',
+      },
+    );
+    if (response.statusCode == 200) {
+      print("ok");
+    } else {
+      // 서버 에러 처리
+      print('Request failed with status: ${response.statusCode}.');
+    }
+  } catch (e) {
+    // 네트워크 에러 처리
+    print('An error occurred: $e');
+  }
+}
+
+Future<void> sendLoginDataToDatabased(String id, String email, String apiUrl) async {
   // 유저 정보 데이터베이스 전송 함수
   Map<String, String> body = {
     'usersSocialId': id,
@@ -16,23 +40,53 @@ void sendDataToDatabase(String id, String email, String apiUrl) async {
 
   try {
     final response = await http.post(
-      Uri.parse("${ApiConstants.baseUrl}$apiUrl"),
+      Uri.parse("${ApiConstants.baseUrl}$apiUrl"),  // http://10.200.32.200:8080/users/login
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonBody,
     );
-    // 201 신규 사용자
-    // 200 기존 사용자
-    if (response.statusCode == 201) {
-      // 신규 사용자
-      print('Response body: ${response.body}');
-      final data = json.decode(response.body) as Map<String, dynamic>;
-      final token = data['token'] as String;
-      await SecureStorageService().saveToken(token);
-    } else if (response.statusCode == 200) {
-      // 기존 사용자
-      print("Response body: ${response.body}");
+    if (response.statusCode == 200) {
+      // login 엔드포인트
+      print(response.headers);
+      String contentType = response.headers['authorization'] ?? 'unknown';
+      print("---------------------------");
+      print('$contentType');
+      SecureStorageService().saveToken(contentType);
+      print("---------------------------");
+
+      sendTestToDatabase();
+      
+    } else {
+      // 서버 에러 처리
+      print('Request failed with status: ${response.statusCode}.');
+    }
+  } catch (e) {
+    // 네트워크 에러 처리
+    print('An error occurred: $e');
+  }
+}
+
+Future<void> sendDataToDatabase(String id, String email, String apiUrl) async {
+  // 유저 정보 데이터베이스 전송 함수
+  Map<String, String> body = {
+    'usersSocialId': id,
+    'usersSocialEmail': email,
+  };
+  String jsonBody = json.encode(body); // json 형식으로 변환
+
+  try {
+    final response = await http.post(
+      Uri.parse("${ApiConstants.baseUrl}$apiUrl"),  // http://10.200.32.200:8080/users/join
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonBody,
+    );
+    if (response.statusCode == 200) {
+      // login 엔드포인트
+      print(response.body);
+      sendLoginDataToDatabased(id, email, Endpoints.logInUrl);
     } else {
       // 서버 에러 처리
       print('Request failed with status: ${response.statusCode}.');

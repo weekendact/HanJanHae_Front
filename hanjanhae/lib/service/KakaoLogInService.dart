@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hanjanhae/DatabaseUrlAddresses.dart';
 import 'package:hanjanhae/service/Variable.dart';
-import 'package:hanjanhae/service/userSecureStorageService.dart';
 import 'package:http/http.dart' as http;
 import 'package:hanjanhae/service/SendLoginDataToDatabaseService.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
@@ -37,10 +36,10 @@ void signInWithKakao(BuildContext context) async {
     print(kakaoId);
     print(kakaoEmail);
 
-    // sendDataToDatabase(kakaoId, kakaoEmail, Endpoints.signUpUrl); // 데이터베이스 전송
+    sendDataToDatabase(kakaoId, kakaoEmail, Endpoints.joinUrl); // 데이터베이스 전송
 
-    Future<String?> jwt = SecureStorageService().selectToken();
-      await sendTokenToDatabase(jwt, Endpoints.nicknameDuplicateUrl);
+    // Future<String?> jwt = SecureStorageService().selectToken();
+    //   await sendTokenToDatabase(jwt, Endpoints.nicknameDuplicateUrl);
     } catch (error) {
     print('카카오톡으로 로그인 실패 $error');
   }
